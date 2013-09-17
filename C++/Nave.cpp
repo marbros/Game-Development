@@ -106,3 +106,25 @@ void nave::pintar_corazones() {
 		gotoxy(70+i+i,2); printf("%c ",3);
 	}
 }
+
+void nave::morir() {
+	if(corazones == 0) {
+		borrar();
+		gotoxy(x,y);   printf("   **   ");
+		gotoxy(x,y+1); printf("  ****  ");
+		gotoxy(x,y+2); printf("   **   ");
+		Sleep(200);
+
+		borrar();
+		gotoxy(x,y);   printf(" * ** *");
+		gotoxy(x,y+1); printf("  **** ");
+		gotoxy(x,y+2); printf(" * ** *");	
+		Sleep(200);
+
+		borrar();
+		vidas--;
+		corazones = 3;
+		pintar_corazones();
+		pintar();							
+	}
+}
