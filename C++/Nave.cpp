@@ -165,3 +165,37 @@ void Asteroide::choque(nave &N) {
 		y = 4;		
 	}
 }
+
+class Bala {
+	int x,y;
+
+	public:
+		Bala(int _x, int _y): x(_x), y(_y) {}
+		int X() { return x; }
+		int Y() { return y; }
+		void mover();
+		bool fuera();
+};
+
+void Bala::mover() {
+	gotoxy(x,y); printf(" ");
+	y--;
+	gotoxy(x,y); printf("*");
+}
+
+bool Bala::fuera() {
+	if (y==4) return true;
+	return false;
+}
+
+int main() {
+
+	OcultarCursor();
+	pintar_limites();
+	nave N(37,30,3,3);
+	N.pintar();
+	N.pintar_corazones();	
+
+	system("pause");
+	return 0;
+}
