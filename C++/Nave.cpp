@@ -209,7 +209,31 @@ int main() {
 	bool game_over = false;
 	int puntos = 0;
 
+	while(!game_over) {
 
+		gotoxy(4,2); printf("Puntos %d", puntos);
+		if(kbhit()) {
+			char tecla = getch();
+			if(tecla == 'a') {
+				B.push_back(new Bala(N.X() + 2, N.Y() -1));
+			}
+		}
+
+		for(key = B.begin(); key != B.end(); key++) {
+			(*key)->mover();
+			if((*key)->fuera()) {
+				gotoxy((*key)->X(),(*key)->Y()); printf(" ");
+				delete(*key);
+				key = B.erase(key);
+			}
+		}
+
+		for (keyA = A.begin(); keyA != A.end(); ++keyA)
+		{
+			(*keyA)->mover();
+			(*keyA)->choque(N);
+		}
+	}
 
 	system("pause");
 	return 0;
