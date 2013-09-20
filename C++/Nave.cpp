@@ -196,6 +196,21 @@ int main() {
 	N.pintar();
 	N.pintar_corazones();	
 
+	list<Asteroide*> A;
+	list<Asteroide*>::iterator keyA;
+
+	for (int i = 0; i < 5; ++i) {
+		A.push_back(new Asteroide(rand()%75 + 3, rand()%5 + 4));
+	}
+
+	list<Bala*> B;
+	list<Bala*>::iterator key;
+
+	bool game_over = false;
+	int puntos = 0;
+
+
+
 	system("pause");
 	return 0;
 }
