@@ -233,6 +233,30 @@ int main() {
 			(*keyA)->mover();
 			(*keyA)->choque(N);
 		}
+
+		for (keyA = A.begin(); keyA != A.end(); ++keyA) {
+			for (key = B.begin(); key != B.end(); ++key) {
+				if((*keyA)->X() == (*key)->X() && (*keyA)->Y() + 1 == (*key)->Y() || (*keyA)->Y() == (*key)->Y()) {
+					gotoxy((*key)->X(), (*key)->Y()); printf(" ");
+					delete(*key);
+					key = B.erase(key);
+
+					A.push_back(new Asteroide(rand()%74 + 3, 4));
+					gotoxy((*keyA)->X(), (*keyA)->Y()); printf(" ");
+					delete(*keyA);
+					keyA = A.erase(keyA);
+
+					puntos += 5;
+				}
+			}
+		}
+		// ast1.mover(); ast1.choque(N);
+		// ast2.mover(); ast2.choque(N); 
+		// ast3.mover(); ast3.choque(N);
+		if(N.VID() == 0) game_over = true;
+		N.morir();
+		N.mover();
+		Sleep(33);		
 	}
 
 	system("pause");
