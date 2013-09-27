@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath.h>
+#include <cstrim.h>
 
 using namespace std;
 
@@ -11,6 +12,18 @@ int temp;
 void drawCards() {
 
 }
+
+     String serverString = "http://source.tutsplus.com/gamedev/authors/JamesTyner/FisherYates/src/images/";
+     int cards = [];
+     i;
+    for (i = 1; i <= 13; i++) {
+        cards.push("c" + i);
+    }
+    //console.log(cards);
+
+     int theLength = cards.length - 1;
+     int toSwap;
+     int tempCard;
 
  void shuffle() {
         cout << "Cards before shuffle:" << cards;
