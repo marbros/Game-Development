@@ -22,8 +22,24 @@ void pieza_s1(int x, int y) {
 
 int main() {
 	vredimensiona(TAM * 10, TAM * 20);
-	for(int i = 0; i < 10; i++) {
-		cuadrado(1, i*2, AMARILLO);
+	int x = 0, y = 0;
+	int t = tecla();
+	while(t != ESCAPE) {
+		if(t == ABAJO) {
+			y++;
+		} else if(t == ARRIBA) {
+			y--;
+		} else if(t == IZQUIERDA) {
+			x--;
+		} else if(t == DERECHA) {
+			x++;
+		}
+		if(t != NINGUNA) {
+			borra();
+			pieza_s1(x,y);
+			refresca();
+		}
+		t = tecla();
 	}
-	refresca();
+	vcierra();
 }
