@@ -12,18 +12,30 @@ void cuadrado(int x, int y, int col) {
 					 y * TAM + TAM);
 }
 
-void pieza_s1(int x, int y) {
+void pieza_s1_horiz(int x, int y) {
 	color(VERDE);
 	cuadrado(x, y);
-	cuadrado(x + 1, y + 0);
-	cuadrado(x + 1, y + 1);
-	cuadrado(x + 2, y + 1);
+	cuadrado(x - 1, y - 1);
+	cuadrado(x, y - 1);
+	cuadrado(x + 1, y);
+}
+
+void pieza_s1_vert(int x, int y) {
+	color(VERDE);
+	cuadrado(x + 1, y - 1);
+	cuadrado(x + 1, y);
+	cuadrado(x + 1, y);
+	cuadrado(x, y + 1);	
 }
 
 int main() {
 	vredimensiona(TAM * 10, TAM * 20);
+	// pieza_s1_horiz(2,2);
+	// pieza_s1_vert(2,6);
 	int x = 0, y = 0;
 	int t = tecla();
+	pieza_s1(x,y);
+	refresca();
 	while(t != ESCAPE) {
 		if(t == ABAJO) {
 			y++;
