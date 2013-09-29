@@ -4,6 +4,17 @@ using namespace miniwin;
 
 const int TAM = 25;
 
+struct Coord
+{
+	int x, y;
+};
+
+struct Pieza
+{
+	Coord orig;
+	Coord perif[3];
+};
+
 void cuadrado(int x, int y, int col) {
 	color(col);
 	rectangulo_lleno(x * TAM,
@@ -18,6 +29,15 @@ void pieza_s1_horiz(int x, int y) {
 	cuadrado(x - 1, y - 1);
 	cuadrado(x, y - 1);
 	cuadrado(x + 1, y);
+}
+
+void pinta_pieza(const Pieza& P) {
+	cuadrado(VERDE);
+	cuadrado(P.orig.x,P.orig.y);
+	for(int i = 0; i < 3; i++) {
+		cuadrado(P.orig.x + P.perif[i].x,
+		         P.orig.y + P.perif[i].y);
+	}
 }
 
 void pieza_s1_vert(int x, int y) {
