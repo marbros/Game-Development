@@ -48,6 +48,17 @@ void pieza_s1_vert(int x, int y) {
 	cuadrado(x, y + 1);	
 }
 
+Coord rota_derecha(Coord& c) {
+	Coord ret = { -c.y, c.x};
+	return ret;
+}
+
+void rota_derecha(Pieza& P) {
+	for (int i = 0; i < 3; ++i) {
+		P.perif[i] = rota_coord(P.perif[i]);
+	}
+}
+
 int main() {
 	vredimensiona(TAM * 10, TAM * 20);
 	// pieza_s1_horiz(2,2);
