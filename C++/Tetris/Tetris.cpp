@@ -22,14 +22,10 @@ struct Pieza
 };
 
 Coord Pieza::posicion(int n) {
-	Coord ret;
-	if(n == 0) {
-		ret.x = orig.x;
-		ret.y = orig.y;
-		return ret;
-	} else {
-		ret.x = orig.x + perif[n-1].x;
-		ret.y = orig.y + perif[n-1].y;
+	Coord ret = { orig.x, orig.y };
+	if(n != 0) {
+		ret.x += perif[n-1].x;
+		ret.y += perif[n-1].y;
 	}
 	return ret;
 }
