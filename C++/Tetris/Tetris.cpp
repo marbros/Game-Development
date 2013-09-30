@@ -23,14 +23,6 @@ void cuadrado(int x, int y, int col) {
 					 y * TAM + TAM);
 }
 
-void pieza_s1_horiz(int x, int y) {
-	color(VERDE);
-	cuadrado(x, y);
-	cuadrado(x - 1, y - 1);
-	cuadrado(x, y - 1);
-	cuadrado(x + 1, y);
-}
-
 void pinta_pieza(const Pieza& P) {
 	cuadrado(VERDE);
 	cuadrado(P.orig.x,P.orig.y);
@@ -40,15 +32,7 @@ void pinta_pieza(const Pieza& P) {
 	}
 }
 
-void pieza_s1_vert(int x, int y) {
-	color(VERDE);
-	cuadrado(x + 1, y - 1);
-	cuadrado(x + 1, y);
-	cuadrado(x + 1, y);
-	cuadrado(x, y + 1);	
-}
-
-Coord rota_derecha(Coord& c) {
+Coord rota_derecha(const Coord& c) {
 	Coord ret = { -c.y, c.x};
 	return ret;
 }
@@ -59,30 +43,40 @@ void rota_derecha(Pieza& P) {
 	}
 }
 
+Coord rota_izquierda(const Coord& c) {
+	Coord ret = { c.y, -c.x};
+	return ret;
+}
+
+void rota_izquierda(Pieza& P) {
+	for (int i = 0; i < 3; ++i) {
+		P.perif[i] = rota_izquierda(P.perif[i]);
+	}
+}
+
 int main() {
 	vredimensiona(TAM * 10, TAM * 20);
 	// pieza_s1_horiz(2,2);
 	// pieza_s1_vert(2,6);
-	int x = 0, y = 0;
+	// int x = 0, y = 0;
+	Pieza s1 = { {2 , 2}, { { -1, -1}, { 0, -1}, { 1, 0} } };
 	int t = tecla();
-	pieza_s1(x,y);
+	pinta_pieza(s1);
+	//pieza_s1(x,y);
 	refresca();
 	while(t != ESCAPE) {
-		if(t == ABAJO) {
-			y++;
-		} else if(t == ARRIBA) {
-			y--;
+		if(t == DERECHA) {
+			rota_derecha(s1);
 		} else if(t == IZQUIERDA) {
-			x--;
-		} else if(t == DERECHA) {
-			x++;
-		}
+			rota_izquierda(s1);
+		} 
 		if(t != NINGUNA) {
 			borra();
-			pieza_s1(x,y);
+			pinta_pieza(s1)
 			refresca();
 		}
 		t = tecla();
 	}
-	vcierra();
+	// vcierra();
+	return 0;
 }
