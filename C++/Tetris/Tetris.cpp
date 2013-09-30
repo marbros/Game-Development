@@ -17,7 +17,22 @@ struct Pieza
 	Coord orig;
 	Coord perif[3];
 	int color;
+
+	Coord posicion(int n);
 };
+
+Coord Pieza::posicion(int n) {
+	Coord ret;
+	if(n == 0) {
+		ret.x = orig.x;
+		ret.y = orig.y;
+		return ret;
+	} else {
+		ret.x = orig.x + perif[n-1].x;
+		ret.y = orig.y + perif[n-1].y;
+	}
+	return ret;
+}
 
 typedef int Tablero[COLUMNAS][FILAS];
 
