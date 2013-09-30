@@ -16,6 +16,7 @@ struct Pieza
 {
 	Coord orig;
 	Coord perif[3];
+	int color;
 };
 
 typedef int Tablero[COLUMNAS][FILAS];
@@ -29,7 +30,7 @@ void cuadrado(int x, int y, int col) {
 }
 
 void pinta_pieza(const Pieza& P) {
-	cuadrado(VERDE);
+	cuadrado(P.color);
 	cuadrado(P.orig.x,P.orig.y);
 	for(int i = 0; i < 3; i++) {
 		cuadrado(P.orig.x + P.perif[i].x,
@@ -59,7 +60,7 @@ void rota_izquierda(Pieza& P) {
 	}
 }
 
-void vacia_tablero(Tablero& T) {
+void tablero_vacia(Tablero& T) {
 	for (int i = 0; i < COLUMNAS; ++i) {
 		for (int j = 0; j < FILAS; ++j) {
 			T[i][j] = NEGRO; //Casilla Vacia.
@@ -67,13 +68,21 @@ void vacia_tablero(Tablero& T) {
 	}
 }
 
-void pinta_tablero(const Tablero& T) {
+void tablero_pinta(const Tablero& T) {
 	for (int i = 0; i < COLUMNAS; ++i) {
 		for (int j = 0; j < FILAS; ++j) {
 			color(T[i][j]);
 			cuadrado(i ,j);
 		}
 	}	
+}
+
+void tablero_incrusta_pieza(Tablero& T, const Pieza& P) {
+	int ox = P.orig.x, oy = P.orig.y;
+	T[ox][oy] = P.color;
+	for (int i = 0; i < 3; ++i) {
+		T[ox + P.perif[i].x][oy + P.perif[i].y] = P.color;
+	}
 }
 
 int main() {
