@@ -3,6 +3,9 @@
 using namespace miniwin;
 
 const int TAM = 25;
+const int FILAS = 20;
+const int COLUMNAS = 10;
+
 
 struct Coord
 {
@@ -14,6 +17,8 @@ struct Pieza
 	Coord orig;
 	Coord perif[3];
 };
+
+typedef int Tablero[COLUMNAS][FILAS];
 
 void cuadrado(int x, int y, int col) {
 	color(col);
@@ -54,8 +59,28 @@ void rota_izquierda(Pieza& P) {
 	}
 }
 
+void vacia_tablero(Tablero& T) {
+	for (int i = 0; i < COLUMNAS; ++i) {
+		for (int j = 0; j < FILAS; ++j) {
+			T[i][j] = NEGRO; //Casilla Vacia.
+		}
+	}
+}
+
+void pinta_tablero(const Tablero& T) {
+	for (int i = 0; i < COLUMNAS; ++i) {
+		for (int j = 0; j < FILAS; ++j) {
+			color(T[i][j]);
+			cuadrado(i ,j);
+		}
+	}	
+}
+
 int main() {
-	vredimensiona(TAM * 10, TAM * 20);
+	Tablero T;
+	vacia_tablero(T);
+	pinta_tablero(T);
+	//vredimensiona(TAM * COLUMNAS, TAM * FILAS);
 	// pieza_s1_horiz(2,2);
 	// pieza_s1_vert(2,6);
 	// int x = 0, y = 0;
