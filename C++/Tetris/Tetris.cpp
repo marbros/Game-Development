@@ -98,6 +98,24 @@ void tablero_incrusta_pieza(Tablero& T, const Pieza& P) {
 	}
 }
 
+bool tablero_colision(const Tablero& T, const Pieza& P) {
+	for (int i = 0; i < 4; ++i) {
+		Coord c = P.posicion(i);
+		//Comprobar limites
+		if(c.x < 0 || c.x >= COLUMNAS) {
+			return true;
+		}
+		if(c.y < 0 || c.y >= FILAS) {
+			return true;
+		}
+		//Mirar "basurilla"
+		if(T[c.x][c.y] != NEGRO) {
+			return true;
+		}
+	}
+	return false;
+}
+
 int main() {
 	Tablero T;
 	vacia_tablero(T);
