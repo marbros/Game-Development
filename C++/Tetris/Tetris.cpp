@@ -43,9 +43,9 @@ void cuadrado(int x, int y, int col) {
 void pinta_pieza(const Pieza& P) {
 	cuadrado(P.color);
 	cuadrado(P.orig.x,P.orig.y);
-	for(int i = 0; i < 3; i++) {
-		cuadrado(P.orig.x + P.perif[i].x,
-		         P.orig.y + P.perif[i].y);
+	for(int i = 0; i < 4; i++) {
+		Coord c = P.posicion(i);
+		cuadrado(c.x, c.y);
 	}
 }
 
@@ -89,10 +89,12 @@ void tablero_pinta(const Tablero& T) {
 }
 
 void tablero_incrusta_pieza(Tablero& T, const Pieza& P) {
-	int ox = P.orig.x, oy = P.orig.y;
-	T[ox][oy] = P.color;
-	for (int i = 0; i < 3; ++i) {
-		T[ox + P.perif[i].x][oy + P.perif[i].y] = P.color;
+	// int ox = P.orig.x, oy = P.orig.y;
+	// T[ox][oy] = P.color;
+	for (int i = 0; i < 4; ++i) {
+		Coord c = P.posicion(i);
+		T[c.x][c.y] = P.color;
+	// 	T[ox + P.perif[i].x][oy + P.perif[i].y] = P.color;
 	}
 }
 
