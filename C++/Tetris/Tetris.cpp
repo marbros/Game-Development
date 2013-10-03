@@ -118,10 +118,24 @@ bool tablero_colision(const Tablero& T, const Pieza& P) {
 	return false;
 }
 
+const Coord perifs[6][3] = {
+ { {1,0}, {0,1}, {1,1} }, //Cuadrado
+ { {1,0}, {-1,1}, {0,1} }, //S
+ { {0,1}, {1,1}, {-1,0} }, // 2
+ { {0,1}, {0,-1}, {1,1} }, // L
+ { {0,1}, {0,-1}, {-1,1} }, //Lr
+ { {1,0}, {0,-1}, {0,2} }, //Palo     
+};
+
 void pieza_nueva(Pieza& P) {
 	P.orig.x = 5;
 	P.orig.y = 3;
 	P.color = 1 + rand() % 6;
+	//Pieza al azar		
+	int r = rand() % 6;
+	for (int i = 0; i < 3; ++i) {
+	 	P.perif[i] = perifs[r][i];
+	} 
 	P.perif[0].x = 1; P.perif[0].y = 0;
 	P.perif[1].x = 1; P.perif[1].y = 1;
 	P.perif[2].x = 0; P.perif[2].y = 1;
