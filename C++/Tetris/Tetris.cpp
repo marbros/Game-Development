@@ -1,4 +1,6 @@
+#include <cstdlib>
 #include "miniwin.h"
+#include <ctime>
 
 using namespace miniwin;
 
@@ -18,7 +20,7 @@ struct Pieza
 	Coord perif[3];
 	int color;
 
-	Coord posicion(int n);
+	Coord posicion(int n) const;
 };
 
 Coord Pieza::posicion(int n) {
@@ -116,7 +118,19 @@ bool tablero_colision(const Tablero& T, const Pieza& P) {
 	return false;
 }
 
+void pieza_nueva(Pieza& P) {
+	P.orig.x = 5;
+	P.orig.y = 3;
+	P.color = 1 + rand() % 6;
+	P.perif[0].x = 1; P.perif[0].y = 0;
+	P.perif[1].x = 1; P.perif[1].y = 1;
+	P.perif[2].x = 0; P.perif[2].y = 1;
+}
+
+
 int main() {
+	srand(time(0));
+
 	Tablero T;
 	vacia_tablero(T);
 	pinta_tablero(T);
@@ -125,11 +139,15 @@ int main() {
 	// pieza_s1_vert(2,6);
 	// int x = 0, y = 0;
 	Pieza s1 = { {2 , 2}, { { -1, -1}, { 0, -1}, { 1, 0} } };
+	Pieza c;
+	pieza_nueva(c);
 	int t = tecla();
 	pinta_pieza(s1);
 	//pieza_s1(x,y);
 	refresca();
 	while(t != ESCAPE) {
+		int x = c.orig.x;
+		int y = c.orig.y;
 		if(t == DERECHA) {
 			rota_derecha(s1);
 		} else if(t == IZQUIERDA) {
@@ -140,8 +158,14 @@ int main() {
 			pinta_pieza(s1)
 			refresca();
 		}
+
+		// Si hay Colision
+		if(tablero_colision(T, c)) {
+			c.orig.x = x;
+			c.orig.y = y;
+		}
 		t = tecla();
 	}
-	// vcierra();
+	vcierra();
 	return 0;
 }
