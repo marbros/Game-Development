@@ -160,24 +160,30 @@ int main() {
 	//pieza_s1(x,y);
 	refresca();
 	while(t != ESCAPE) {
+		Pieza copia = c;
 		int x = c.orig.x;
 		int y = c.orig.y;
 		if(t == DERECHA) {
 			rota_derecha(s1);
 		} else if(t == IZQUIERDA) {
-			rota_izquierda(s1);
+			rota_izquierda(c);
 		} 
 		if(t != NINGUNA) {
 			borra();
-			pinta_pieza(s1)
+			pinta_pieza(c)
 			refresca();
 		}
 
 		// Si hay Colision
 		if(tablero_colision(T, c)) {
-			c.orig.x = x;
-			c.orig.y = y;
+			c = copia;
 		}
+
+		if(t == ESCAPE) {
+			tablero_incrusta_pieza(T, c);
+			pieza_nueva(c);
+		}
+		
 		t = tecla();
 	}
 	vcierra();
