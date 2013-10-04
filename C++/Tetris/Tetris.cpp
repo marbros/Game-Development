@@ -141,6 +141,12 @@ void pieza_nueva(Pieza& P) {
 	P.perif[2].x = 0; P.perif[2].y = 1;
 }
 
+bool tablero_fila_llena(const Tablero& T, int fila) {
+	for (int i = 0; i < COLUMNAS; ++i) {
+		if (T[i][fila] == NEGRO) return false;
+	}
+	return true;
+}
 
 int main() {
 	srand(time(0));
@@ -183,7 +189,7 @@ int main() {
 			tablero_incrusta_pieza(T, c);
 			pieza_nueva(c);
 		}
-		
+
 		t = tecla();
 	}
 	vcierra();
