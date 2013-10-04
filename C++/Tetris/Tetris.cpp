@@ -148,6 +148,18 @@ bool tablero_fila_llena(const Tablero& T, int fila) {
 	return true;
 }
 
+void tablero_colapsa(Tablero& T, int fila) {
+	//Copiar de abajo a arriba
+	for (int j = fila; j < 0; j--) {
+		for (int i = 0; i < COLUMNAS; ++i) {
+			T[i][fila] = T[i][fila-1];
+		}
+	}
+	for (int i = 0; i < COLUMNAS; ++i) {
+		T[i][0] = NEGRO;
+	}
+}
+
 int main() {
 	srand(time(0));
 
