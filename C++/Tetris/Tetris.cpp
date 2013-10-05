@@ -62,17 +62,6 @@ void rota_derecha(Pieza& P) {
 	}
 }
 
-Coord rota_izquierda(const Coord& c) {
-	Coord ret = { c.y, -c.x};
-	return ret;
-}
-
-void rota_izquierda(Pieza& P) {
-	for (int i = 0; i < 3; ++i) {
-		P.perif[i] = rota_izquierda(P.perif[i]);
-	}
-}
-
 void tablero_vacia(Tablero& T) {
 	for (int i = 0; i < COLUMNAS; ++i) {
 		for (int j = 0; j < FILAS; ++j) {
