@@ -152,12 +152,24 @@ void tablero_colapsa(Tablero& T, int fila) {
 	//Copiar de abajo a arriba
 	for (int j = fila; j < 0; j--) {
 		for (int i = 0; i < COLUMNAS; ++i) {
-			T[i][fila] = T[i][fila-1];
+			T[i][fila] = T[i][j-1];
 		}
 	}
 	for (int i = 0; i < COLUMNAS; ++i) {
 		T[i][0] = NEGRO;
 	}
+}
+
+int tablero_cuenta_lineas(Tablero& T) {
+	int fila = FILAS - 1, cont = 0;
+	while(fila >= 0) {
+		if(tablero_fila_llena(T, fila)) {
+			tablero_colapsa(T, fila);
+		} else {
+			fila--;
+		}
+	}
+	return cont;
 }
 
 int main() {
@@ -198,6 +210,7 @@ int main() {
 		}
 
 		if(t == ESCAPE) {
+			int cont = tablero_cuenta_lineas(T,c);
 			tablero_incrusta_pieza(T, c);
 			pieza_nueva(c);
 		}
