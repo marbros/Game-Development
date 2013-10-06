@@ -174,12 +174,18 @@ int main() {
 	// int x = 0, y = 0;
 	Pieza s1 = { {2 , 2}, { { -1, -1}, { 0, -1}, { 1, 0} } };
 	Pieza c;
+	int tic = 0;
 	pieza_nueva(c);
 	int t = tecla();
 	pinta_pieza(s1);
 	//pieza_s1(x,y);
 	refresca();
 	while(t != ESCAPE) {
+		if(t == NINGUNA && tic > 30) {
+			tic = 0;
+			t = ABAJO;
+		}
+
 		Pieza copia = c;
 		int x = c.orig.x;
 		int y = c.orig.y;
@@ -197,14 +203,14 @@ int main() {
 		// Si hay Colision
 		if(tablero_colision(T, c)) {
 			c = copia;
+			if(t == ABAJO) {
+				tablero_incrusta_pieza(T, c);
+				int cont = tablero_cuenta_lineas(T,c);
+				pieza_nueva(c);
+			}			
 		}
-
-		if(t == ESCAPE) {
-			int cont = tablero_cuenta_lineas(T,c);
-			tablero_incrusta_pieza(T, c);
-			pieza_nueva(c);
-		}
-
+		espera(33);
+		tic++;
 		t = tecla();
 	}
 	vcierra();
