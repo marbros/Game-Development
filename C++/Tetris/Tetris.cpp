@@ -113,6 +113,7 @@ const Coord perifs[6][3] = {
  { {0,1}, {1,1}, {-1,0} }, // 2
  { {0,1}, {0,-1}, {1,1} }, // L
  { {0,1}, {0,-1}, {-1,1} }, //Lr
+ { {-1,0}, {1,0}, {0,1} }, //T
  { {1,0}, {0,-1}, {0,2} }, //Palo     
 };
 
@@ -121,7 +122,7 @@ void pieza_nueva(Pieza& P) {
 	P.orig.y = 3;
 	P.color = 1 + rand() % 6;
 	//Pieza al azar		
-	int r = rand() % 6;
+	int r = rand() % 7;
 	for (int i = 0; i < 3; ++i) {
 	 	P.perif[i] = perifs[r][i];
 	} 
