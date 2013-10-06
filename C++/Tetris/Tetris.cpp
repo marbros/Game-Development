@@ -118,8 +118,8 @@ const Coord perifs[6][3] = {
 };
 
 void pieza_nueva(Pieza& P) {
-	P.orig.x = 5;
-	P.orig.y = 3;
+	P.orig.x = 12;
+	P.orig.y = 2;
 	P.color = 1 + rand() % 6;
 	//Pieza al azar		
 	int r = rand() % 7;
@@ -162,7 +162,7 @@ int tablero_cuenta_lineas(Tablero& T) {
 	return cont;
 }
 
-void repinta(const Tablero& T, const Pieza& p) {
+void repinta(const Tablero& T, const Pieza& p, const Pieza& sig ) {
 	const int ancho = TAM * COLUMNAS, alto = TAM * FILAS;
 	borra();
 	tablero_pinta(T);
@@ -174,6 +174,7 @@ void repinta(const Tablero& T, const Pieza& p) {
 	texto(40 + ancho,150,"Nivel");
 	texto(40 + ancho,250,"Puntos");	
 	pinta_pieza(p)
+	pinta_pieza(sig)	
 	refresca();	
 }
 
@@ -188,10 +189,13 @@ int main() {
 	// pieza_s1_vert(2,6);
 	// int x = 0, y = 0;
 	Pieza s1 = { {2 , 2}, { { -1, -1}, { 0, -1}, { 1, 0} } };
-	Pieza c;
+	Pieza c,sig;
 	int tic = 0;
 	pieza_nueva(c);
-	repinta(T, c);
+	pieza_nueva(sig);
+	sig.orig.x = 5;
+
+	repinta(T, c,sig);
 	int t = tecla();
 	pinta_pieza(s1);
 	//pieza_s1(x,y);
@@ -211,7 +215,7 @@ int main() {
 			rota_izquierda(c);
 		} 
 		if(t != NINGUNA) {
-			repinta(T, c);
+			repinta(T, c,sig);
 		}
 
 		// Si hay Colision
@@ -220,7 +224,9 @@ int main() {
 			if(t == ABAJO) {
 				tablero_incrusta_pieza(T, c);
 				int cont = tablero_cuenta_lineas(T,c);
-				pieza_nueva(c);
+				c = sig;
+				pieza_nueva(sig);
+				c.orig.x = 5;
 			}			
 		}
 		espera(33);
