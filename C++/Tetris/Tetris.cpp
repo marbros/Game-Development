@@ -36,10 +36,10 @@ typedef int Tablero[COLUMNAS][FILAS];
 
 void cuadrado(int x, int y, int col) {
 	color(col);
-	rectangulo_lleno(x * TAM,
-					 y * TAM,
-					 x * TAM + TAM,
-					 y * TAM + TAM);
+	rectangulo_lleno(20 + 1 + x * TAM,
+					 20 + 1 + y * TAM,
+					 20 + x * TAM + TAM,
+					 20 + y * TAM + TAM);
 }
 
 void pinta_pieza(const Pieza& P) {
@@ -162,6 +162,21 @@ int tablero_cuenta_lineas(Tablero& T) {
 	return cont;
 }
 
+void repinta(const Tablero& T, const Pieza& p) {
+	const int ancho = TAM * COLUMNAS, alto = TAM * FILAS;
+	borra();
+	tablero_pinta(T);
+	color_rgb(128,128, 128);
+	linea(20, 20, 20, 20 + alto);
+	linea(0, 20 + alto, 20 + ancho);
+	linea(20 + ancho, 20 + alto, 20 + ancho, 0);
+	texto(40 + ancho,20,"Pieza Siguiente");
+	texto(40 + ancho,150,"Nivel");
+	texto(40 + ancho,250,"Puntos");	
+	pinta_pieza(p)
+	refresca();	
+}
+
 int main() { 
 	vredimensiona(TAM * COLUMNAS + 220, TAM * FILAS + 100);
 	srand(time(0));
@@ -176,6 +191,7 @@ int main() {
 	Pieza c;
 	int tic = 0;
 	pieza_nueva(c);
+	repinta(T, c);
 	int t = tecla();
 	pinta_pieza(s1);
 	//pieza_s1(x,y);
@@ -195,14 +211,7 @@ int main() {
 			rota_izquierda(c);
 		} 
 		if(t != NINGUNA) {
-			borra();
-			tablero_pinta(T);
-			color(BLANCO);
-			linea(0, 0, 0, TAM * FILAS);
-			linea(0, TAM * FILAS, TAM * COLUMNAS);
-			linea(TAM * COLUMNAS, TAM * FILAS, TAM * COLUMNAS, 0);
-			pinta_pieza(c)
-			refresca();
+			repinta(T, c);
 		}
 
 		// Si hay Colision
