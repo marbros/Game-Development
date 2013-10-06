@@ -162,13 +162,13 @@ int tablero_cuenta_lineas(Tablero& T) {
 	return cont;
 }
 
-int main() {
+int main() { 
+	vredimensiona(TAM * COLUMNAS + 220, TAM * FILAS + 100);
 	srand(time(0));
 
 	Tablero T;
 	vacia_tablero(T);
 	pinta_tablero(T);
-	//vredimensiona(TAM * COLUMNAS, TAM * FILAS);
 	// pieza_s1_horiz(2,2);
 	// pieza_s1_vert(2,6);
 	// int x = 0, y = 0;
@@ -196,6 +196,11 @@ int main() {
 		} 
 		if(t != NINGUNA) {
 			borra();
+			tablero_pinta(T);
+			color(BLANCO);
+			linea(0, 0, 0, TAM * FILAS);
+			linea(0, TAM * FILAS, TAM * COLUMNAS);
+			linea(TAM * COLUMNAS, TAM * FILAS, TAM * COLUMNAS, 0);
 			pinta_pieza(c)
 			refresca();
 		}
