@@ -194,6 +194,18 @@ const int puntos_limite[10] = {
 	50, 100, 130, 150, 170, 200, 220, 240, 260, 330
 };
 
+const int tics_nivel[10] = {
+	33, 25, 20, 18, 16, 14, 12, 10 , 8, 2
+};
+
+void game_over() {
+	color(BLANCO);
+	texto(140, 240, "GAME OVER!");
+	refresca();
+	espera(1000);
+	vcierra();	
+}
+
 int main() { 
 	vredimensiona(TAM * COLUMNAS + 220, TAM * FILAS + 100);
 	srand(time(0));
@@ -217,11 +229,13 @@ int main() {
 	//pieza_s1(x,y);
 	refresca();
 	while(t != ESCAPE) {
-		if(t == NINGUNA && tic > 30) {
+		if(t == NINGUNA && tic > tics_nivel[nivel]) {
 			tic = 0;
 			t = ABAJO;
 		}
-
+		if(t == int('N')) {
+			nivel++;
+		}
 		Pieza copia = c;
 		int x = c.orig.x;
 		int y = c.orig.y;
@@ -247,6 +261,9 @@ int main() {
 				c = sig;
 				pieza_nueva(sig);
 				c.orig.x = 5;
+				if(tablero_colision(T, c)) {
+					game_over();
+				}
 			}			
 		}
 		espera(33);
