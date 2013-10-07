@@ -1,7 +1,10 @@
 #include <cstdlib>
 #include "miniwin.h"
 #include <ctime>
+#include <sstream>
+#include <string>
 
+using namespace std;
 using namespace miniwin;
 
 const int TAM = 25;
@@ -162,7 +165,13 @@ int tablero_cuenta_lineas(Tablero& T) {
 	return cont;
 }
 
-void repinta(const Tablero& T, const Pieza& p, const Pieza& sig ) {
+string muestra_puntos(int puntos) {
+	stringstream sout;
+	sout << puntos;
+	return sout.str();
+}
+
+void repinta(const Tablero& T, const Pieza& p, const Pieza& sig, int puntos ) {
 	const int ancho = TAM * COLUMNAS, alto = TAM * FILAS;
 	borra();
 	tablero_pinta(T);
@@ -173,6 +182,8 @@ void repinta(const Tablero& T, const Pieza& p, const Pieza& sig ) {
 	texto(40 + ancho,20,"Pieza Siguiente");
 	texto(40 + ancho,150,"Nivel");
 	texto(40 + ancho,250,"Puntos");	
+	color(BLANCO);
+	texto(40 + ancho, 270, "10");
 	pinta_pieza(p)
 	pinta_pieza(sig)	
 	refresca();	
@@ -190,12 +201,12 @@ int main() {
 	// int x = 0, y = 0;
 	Pieza s1 = { {2 , 2}, { { -1, -1}, { 0, -1}, { 1, 0} } };
 	Pieza c,sig;
-	int tic = 0;
+	int tic = 0, puntos = 0;
 	pieza_nueva(c);
 	pieza_nueva(sig);
 	sig.orig.x = 5;
 
-	repinta(T, c,sig);
+	repinta(T, c,sig,puntos);
 	int t = tecla();
 	pinta_pieza(s1);
 	//pieza_s1(x,y);
@@ -215,7 +226,7 @@ int main() {
 			rota_izquierda(c);
 		} 
 		if(t != NINGUNA) {
-			repinta(T, c,sig);
+			repinta(T, c,sig,muestra_puntos(puntos));
 		}
 
 		// Si hay Colision
@@ -223,7 +234,8 @@ int main() {
 			c = copia;
 			if(t == ABAJO) {
 				tablero_incrusta_pieza(T, c);
-				int cont = tablero_cuenta_lineas(T,c);
+				int cont = tablero_cuenta_lineas(T);
+				puntos += cont * cont;
 				c = sig;
 				pieza_nueva(sig);
 				c.orig.x = 5;
