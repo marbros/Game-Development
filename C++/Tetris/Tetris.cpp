@@ -165,13 +165,13 @@ int tablero_cuenta_lineas(Tablero& T) {
 	return cont;
 }
 
-string muestra_puntos(int puntos) {
+string a_string(int puntos) {
 	stringstream sout;
 	sout << puntos;
 	return sout.str();
 }
 
-void repinta(const Tablero& T, const Pieza& p, const Pieza& sig, int puntos ) {
+void repinta(const Tablero& T, const Pieza& p, const Pieza& sig, int puntos, int nivel) {
 	const int ancho = TAM * COLUMNAS, alto = TAM * FILAS;
 	borra();
 	tablero_pinta(T);
@@ -183,11 +183,16 @@ void repinta(const Tablero& T, const Pieza& p, const Pieza& sig, int puntos ) {
 	texto(40 + ancho,150,"Nivel");
 	texto(40 + ancho,250,"Puntos");	
 	color(BLANCO);
-	texto(40 + ancho, 270, "10");
+	texto(40 + ancho, 270, a_string(puntos));
+	texto(40 + ancho, 170, a_string(nivel + 1));
 	pinta_pieza(p)
 	pinta_pieza(sig)	
 	refresca();	
 }
+
+const int puntos_limite[10] = {
+	50, 100, 130, 150, 170, 200, 220, 240, 260, 330
+};
 
 int main() { 
 	vredimensiona(TAM * COLUMNAS + 220, TAM * FILAS + 100);
@@ -201,12 +206,12 @@ int main() {
 	// int x = 0, y = 0;
 	Pieza s1 = { {2 , 2}, { { -1, -1}, { 0, -1}, { 1, 0} } };
 	Pieza c,sig;
-	int tic = 0, puntos = 0;
+	int tic = 0, puntos = 0, nivel = 0;
 	pieza_nueva(c);
 	pieza_nueva(sig);
 	sig.orig.x = 5;
 
-	repinta(T, c,sig,puntos);
+	repinta(T, c,sig,puntos,nivel);
 	int t = tecla();
 	pinta_pieza(s1);
 	//pieza_s1(x,y);
@@ -226,7 +231,7 @@ int main() {
 			rota_izquierda(c);
 		} 
 		if(t != NINGUNA) {
-			repinta(T, c,sig,muestra_puntos(puntos));
+			repinta(T, c,sig,puntos,nivel);
 		}
 
 		// Si hay Colision
@@ -236,6 +241,9 @@ int main() {
 				tablero_incrusta_pieza(T, c);
 				int cont = tablero_cuenta_lineas(T);
 				puntos += cont * cont;
+				if(puntos > puntos_limite[nivel]) {
+					nivel++;
+				}
 				c = sig;
 				pieza_nueva(sig);
 				c.orig.x = 5;
