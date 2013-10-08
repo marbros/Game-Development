@@ -22,3 +22,15 @@ function jump() {
         isJumping = true;
     }
 }
+
+function gameloop(){
+ if (isJumping) {
+     yVel += gravity;
+     character.y += yVel;
+         if (character.y > characterGround) {
+             character.y = characterGround;
+             yVel = 0;
+             isJumping = false;
+            }
+     }
+}
