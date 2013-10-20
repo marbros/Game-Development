@@ -26,7 +26,7 @@ struct Pieza
 	Coord posicion(int n) const;
 };
 
-Coord Pieza::posicion(int n) {
+Coord Pieza::posicion(int n) const {
 	Coord ret = { orig.x, orig.y };
 	if(n != 0) {
 		ret.x += perif[n-1].x;
@@ -110,7 +110,7 @@ bool tablero_colision(const Tablero& T, const Pieza& P) {
 	return false;
 }
 
-const Coord perifs[6][3] = {
+const Coord perifs[7][3] = {
  { {1,0}, {0,1}, {1,1} }, //Cuadrado
  { {1,0}, {-1,1}, {0,1} }, //S
  { {0,1}, {1,1}, {-1,0} }, // 2
@@ -264,7 +264,7 @@ int main() {
 				if(tablero_colision(T, c)) {
 					game_over();
 				}
-			}			
+			}
 		}
 		espera(33);
 		tic++;
