@@ -9,6 +9,11 @@
 #define ESC       27
 
 int cuerpo[200][2];
+int n = 1;
+int tam = 3;
+int x = 10; y = 12;
+
+char tecla;
 
 void gotoxy(int x, int y) {
 	HANDLE hcon;
@@ -38,23 +43,20 @@ void pintar() {
 	gotoxy(77,23); printf("%c",188);
 }
 
-int main() {
-	cuerpo[0][0] = 3;
-	cuerpo[0][1] = 5;
-	cuerpo[1][0] = 4;
-	cuerpo[1][1] = 5;
-	cuerpo[2][0] = 5;
-	cuerpo[2][1] = 5;						
-	// for (int i = 0; i < 3; ++i) {
-	// 	for (int j = 0; j < 2; ++j) {
-	// 		cuerpo[j][i] = rand()%10;
-	// 	}
-	// }
+void guardar_posicion() {
+	cuerpo[n] [0] = x;
+	cuerpo[n] [1] = y;
+	n++;
+	if(n == tam) n = 1;
+}
 
-	for (int i = 0; i < 3; ++i) {
-			gotoxy(cuerpo[j][0], cuerpo[j][1]);
-			printf("*");
-	}	
+int main() {
+	while(tecla != ESC) {
+		borrar_cuerpo();
+		guardar_posicion();
+		pintar_cuerpo();
+
+	}
 	pintar();
 	system("pause>null");
 	return 0;
