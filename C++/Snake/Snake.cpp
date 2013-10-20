@@ -8,6 +8,8 @@
 #define ABAJO     80
 #define ESC       27
 
+int cuerpo[200][2];
+
 void gotoxy(int x, int y) {
 	HANDLE hcon;
 	COOD dwPos;
@@ -37,6 +39,22 @@ void pintar() {
 }
 
 int main() {
+	cuerpo[0][0] = 3;
+	cuerpo[0][1] = 5;
+	cuerpo[1][0] = 4;
+	cuerpo[1][1] = 5;
+	cuerpo[2][0] = 5;
+	cuerpo[2][1] = 5;						
+	// for (int i = 0; i < 3; ++i) {
+	// 	for (int j = 0; j < 2; ++j) {
+	// 		cuerpo[j][i] = rand()%10;
+	// 	}
+	// }
+
+	for (int i = 0; i < 3; ++i) {
+			gotoxy(cuerpo[j][0], cuerpo[j][1]);
+			printf("*");
+	}	
 	pintar();
 	system("pause>null");
 	return 0;
