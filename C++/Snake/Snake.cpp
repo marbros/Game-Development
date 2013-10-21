@@ -10,8 +10,8 @@
 
 int cuerpo[200][2];
 int n = 1;
-int tam = 3;
-int x = 10; y = 12;
+int tam = 4;
+int x = 10, y = 12;
 
 char tecla;
 
@@ -57,11 +57,19 @@ void dibujar_cuerpo() {
 	}
 }
 
+void borrar_cuerpo() {
+		gotoxy(cuerpo[n][0],cuerpo[n][1]);
+		printf(" ");
+	}	
+}
+
 int main() {
 	while(tecla != ESC) {
 		borrar_cuerpo();
 		guardar_posicion();
-		pintar_cuerpo();
+		dibujar_cuerpo();
+		x++;
+		Sleep(100);
 
 	}
 	pintar();
