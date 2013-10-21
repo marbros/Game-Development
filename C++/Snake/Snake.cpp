@@ -50,6 +50,13 @@ void guardar_posicion() {
 	if(n == tam) n = 1;
 }
 
+void dibujar_cuerpo() {
+	for (int i = 1; i < tam; ++i) {
+		gotoxy(cuerpo[i][0],cuerpo[i][1]);
+		printf("*");
+	}
+}
+
 int main() {
 	while(tecla != ESC) {
 		borrar_cuerpo();
