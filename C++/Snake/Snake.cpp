@@ -13,6 +13,7 @@ int n = 1;
 int tam = 4;
 int x = 10, y = 12;
 int dir = 3;
+int xc = 30, yc = 15;
 
 char tecla;
 
@@ -64,39 +65,53 @@ void borrar_cuerpo() {
 	}	
 }
 
+void direccion() {
+	if(kbhit()) {
+		tecla = getch();
+		switch(tecla) {
+			case ARRIBA:
+				if(dir != 2)
+					dir = 1;
+					break;
+			case ABAJO:
+				if(dir != 1)
+					dir = 2;
+					break;
+			case DERECHA:
+				if(dir != 4)
+					dir = 3;
+					break;
+			case IZQUIERDA:
+				if(dir != 3)
+					dir = 4;
+					break;
+		}
+	}	
+}
+
+void comida() {
+	if(x == xc && y == yc) {
+		xc = (rand()%73) + 4;
+		yc = (rand()%19) + 4;
+		tam++;
+		gotoxy(xc,yc); printf("%c", 4);
+	}
+}
+
 int main() {
 	pintar();
+	gotoxy(xc,yc); printf("%c", 4);
 	while(tecla != ESC) {
 		borrar_cuerpo();
 		guardar_posicion();
 		dibujar_cuerpo();
-		x++;
-		if(kbhit()) {
-			tecla = getch();
-			switch(tecla) {
-				case ARRIBA:
-					if(dir != 2)
-						dir = 1;
-						break;
-				case ABAJO:
-					if(dir != 1)
-						dir = 2;
-						break;
-				case DERECHA:
-					if(dir != 4)
-						dir = 3;
-						break;
-				case IZQUIERDA:
-					if(dir != 3)
-						dir = 4;
-						break;
-			}
-		}
+		comida();
+		direccion();
 		if(dir == 1) y--;
 		if(dir == 2) y++;
 		if(dir == 3) x++;
 		if(dir == 4) x--;
-		
+
 		Sleep(100);
 	}
 	pintar();	
