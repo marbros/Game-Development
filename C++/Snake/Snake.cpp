@@ -91,6 +91,13 @@ void direccion() {
 	}	
 }
 
+void cambiar_velocidad() {
+	if(score == h*20) {
+		velocidad -= 10;
+		h++;
+	}
+}
+
 void comida() {
 	if(x == xc && y == yc) {
 		xc = (rand()%73) + 4;
@@ -98,6 +105,7 @@ void comida() {
 		tam++;
 		score += 10;
 		gotoxy(xc,yc); printf("%c", 4);
+		cambiar_velocidad();
 	}
 }
 
@@ -114,13 +122,6 @@ void puntos() {
 	gotoxy(3,1); printf("score %d",score);
 }
 
-void cambiar_velocidad() {
-	if(score == h*20) {
-		velocidad -= 10;
-		h++;
-	}
-}
-
 int main() {
 	pintar();
 	gotoxy(xc,yc); printf("%c", 4);
@@ -130,7 +131,6 @@ int main() {
 		dibujar_cuerpo();
 		comida();
 		puntos();
-		cambiar_velocidad();
 		direccion();
 		direccion();
 		if(dir == 1) y--;
