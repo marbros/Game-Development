@@ -14,7 +14,7 @@ int tam = 4;
 int x = 10, y = 12;
 int dir = 3;
 int xc = 30, yc = 15;
-
+int velocidad = 100;
 char tecla;
 
 void gotoxy(int x, int y) {
@@ -100,6 +100,10 @@ void comida() {
 
 bool game_over() {
 	if(y == 3 || y == 23 || x == 2 || x == 77) return false;
+	for (int j = tam -1; i > 0; j--) {
+		if(cuerpo[j][0] == x && cuerpo[j][1] == y)
+			return false;
+	}	
 	return true;
 }
 
@@ -112,12 +116,13 @@ int main() {
 		dibujar_cuerpo();
 		comida();
 		direccion();
+		direccion();
 		if(dir == 1) y--;
 		if(dir == 2) y++;
 		if(dir == 3) x++;
 		if(dir == 4) x--;
 
-		Sleep(100);
+		Sleep(velocidad);
 	}
 	pintar();	
 	system("pause>null");
