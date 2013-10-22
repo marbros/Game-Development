@@ -98,10 +98,15 @@ void comida() {
 	}
 }
 
+bool game_over() {
+	if(y == 3 || y == 23 || x == 2 || x == 77) return false;
+	return true;
+}
+
 int main() {
 	pintar();
 	gotoxy(xc,yc); printf("%c", 4);
-	while(tecla != ESC) {
+	while(tecla != ESC && game_over()) {
 		borrar_cuerpo();
 		guardar_posicion();
 		dibujar_cuerpo();
