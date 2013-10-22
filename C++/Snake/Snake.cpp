@@ -14,7 +14,9 @@ int tam = 4;
 int x = 10, y = 12;
 int dir = 3;
 int xc = 30, yc = 15;
-int velocidad = 100;
+int velocidad = 100, h = 1;
+int score = 0;
+
 char tecla;
 
 void gotoxy(int x, int y) {
@@ -94,6 +96,7 @@ void comida() {
 		xc = (rand()%73) + 4;
 		yc = (rand()%19) + 4;
 		tam++;
+		score += 10;
 		gotoxy(xc,yc); printf("%c", 4);
 	}
 }
@@ -107,6 +110,17 @@ bool game_over() {
 	return true;
 }
 
+void puntos() {
+	gotoxy(3,1); printf("score %d",score);
+}
+
+void cambiar_velocidad() {
+	if(score == h*20) {
+		velocidad -= 10;
+		h++;
+	}
+}
+
 int main() {
 	pintar();
 	gotoxy(xc,yc); printf("%c", 4);
@@ -115,6 +129,8 @@ int main() {
 		guardar_posicion();
 		dibujar_cuerpo();
 		comida();
+		puntos();
+		cambiar_velocidad();
 		direccion();
 		direccion();
 		if(dir == 1) y--;
