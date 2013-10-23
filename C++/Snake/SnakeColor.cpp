@@ -12,13 +12,21 @@ void cuadrado(int x, int y, int c) {
 
 int main() {
 	vredimensiona(XTAM * SZ, YTAM * SZ);
-	int x = 30, y = 20;
+	int x = 30, y = 20; // cabeza
+	int vx = 1, vy = 0; //velocidad
+	int retraso = 0;
 	int t = tecla();
 	while(t != ESCAPE) {
+		retraso++;
+		if(retraso == 8) {
+			x += vx;
+			y += vy;
+			retraso = 0;
+		}
 		borra();
 		cuadrado(x, y, VERDE);
 		refresca();
-		espera(10);
+		espera(30);
 		t = tecla();
 	}
 	vcierra();
