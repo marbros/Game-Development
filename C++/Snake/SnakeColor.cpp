@@ -12,9 +12,15 @@ void cuadrado(int x, int y, int c) {
 
 int main() {
 	vredimensiona(XTAM * SZ, YTAM * SZ);
-	for (int i = 0; i < 10; ++i) {
-		cuadrado(10 + i, 10, VERDE);
+	int x = 30, y = 20;
+	int t = tecla();
+	while(t != ESCAPE) {
+		borra();
+		cuadrado(x, y, VERDE);
+		refresca();
+		espera(10);
+		t = tecla();
 	}
-	refresca();
-	return o;
+	vcierra();
+	return 0;
 }
