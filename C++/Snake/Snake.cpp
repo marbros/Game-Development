@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <iostream>
 #include <conio.h>
+#include <stdio.h>
 
 #define ARRIBA    72
 #define IZQUIERDA 75
@@ -19,21 +20,25 @@ int score = 0;
 
 char tecla;
 
+using namespace std;
+
 void gotoxy(int x, int y) {
-	HANDLE hcon;
-	COOD dwPos;
+	HANDLE hCon;
+	COORD dwPos;
 
 	dwPos.X = x;
 	dwPos.Y = y;
-	hCon = GeySTdHanfle(STD_OUTPUT_HANDLE);
+	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(hCon,dwPos);
 }
 
 void pintar() {
 	//lineas hori
 	for (int i = 2; i < 78; ++i) {
-	 	gotoxy(i,3); printf("%c", 205);
-		gotoxy(i,23); printf("%c", 205);
+	 	gotoxy(i,3);
+	 	printf("%c", 205);
+		gotoxy(i,23);
+		printf("%c", 205);
 	}
 	//lineas Ver
 	for (int i = 4; i < 23; ++i) {
@@ -56,15 +61,13 @@ void guardar_posicion() {
 
 void dibujar_cuerpo() {
 	for (int i = 1; i < tam; ++i) {
-		gotoxy(cuerpo[i][0],cuerpo[i][1]);
-		printf("*");
+		gotoxy(cuerpo[i][0],cuerpo[i][1]); printf("*");
 	}
 }
 
 void borrar_cuerpo() {
 		gotoxy(cuerpo[n][0],cuerpo[n][1]);
 		printf(" ");
-	}	
 }
 
 void direccion() {
@@ -111,7 +114,7 @@ void comida() {
 
 bool game_over() {
 	if(y == 3 || y == 23 || x == 2 || x == 77) return false;
-	for (int j = tam -1; i > 0; j--) {
+	for (int j = tam -1; j > 0; j--) {
 		if(cuerpo[j][0] == x && cuerpo[j][1] == y)
 			return false;
 	}	
