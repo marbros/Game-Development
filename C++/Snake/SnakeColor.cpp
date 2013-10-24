@@ -1,6 +1,8 @@
 #include "miniwin.h"
+#include <list>;
 
 using namespace miniwin;
+using namespace std;
 
 const int XTAM = 80, YTAM = 40;
 const int SZ = 12;
@@ -40,7 +42,10 @@ int main() {
 		}
 		borra();
 		list<Punto>::const_iterator it;
-		cuadrado(cabeza, VERDE);
+		for(it = cola.begin(); it != cola.end(); it++) {
+			cuadrado(*it, VERDE);
+		}
+		cuadrado(cabeza, ROJO);
 		refresca();
 		espera(30);
 		t = tecla();
