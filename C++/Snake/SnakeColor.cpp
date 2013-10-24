@@ -18,6 +18,15 @@ int main() {
 	int t = tecla();
 	while(t != ESCAPE) {
 		retraso++;
+		if(t == ARRIBA) {
+			vx = 0, vy = -1;
+		} else if(t == ABAJO) {
+			vx = 0, vy = 1;
+		} else if(t == IZQUIERDA) {
+			vx = -1, vy = 0;
+		} else if(t == DERECHA) {
+			vx = 1, vy = 0;
+		}
 		if(retraso == 8) {
 			x += vx;
 			y += vy;
