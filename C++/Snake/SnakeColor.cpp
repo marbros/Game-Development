@@ -67,13 +67,15 @@ int main() {
 			}
 			retraso = 0;
 		}
-		borra();
-		list<Punto>::const_iterator it;
-		for(it = cola.begin(); it != cola.end(); it++) {
-			cuadrado(*it, VERDE);
+		if(!choque) {
+			borra();
+			list<Punto>::const_iterator it;
+			for(it = cola.begin(); it != cola.end(); it++) {
+				cuadrado(*it, VERDE);
+			}
+			cuadrado(cabeza, ROJO);
+			refresca();
 		}
-		cuadrado(cabeza, ROJO);
-		refresca();
 		espera(30);
 		t = tecla();
 	}
