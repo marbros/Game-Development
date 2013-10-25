@@ -16,6 +16,22 @@ void cuadrado(const Punto& p, int c) {
 	rectangulo_lleno(p.x*SZ, p.y*SZ, (p.x+1)*SZ-1, (p.y+1)*SZ-1);
 }
 
+bool hay_choque(const Punto& cabeza, const list<Punto>& cola) {
+	if(cabeza.x >= XTAM || cabeza.x < 0) {
+		return true;	
+	} 
+	if(cabeza.y >= YTAM || cabeza.y < 0) {
+		return true;
+	} 
+	list<Punto>::const_iterator it;
+	for (it = cola.begin(); it != cola.end(); it++) {
+		if(cabeza.x == it->x && cabeza.y == it->y) {
+			return true;
+		}
+	}
+	return false;
+}
+
 int main() {
 	vredimensiona(XTAM * SZ, YTAM * SZ);
 	Punto cabeza = {30, 20};
@@ -23,7 +39,8 @@ int main() {
 	list<Punto> cola;
 	int retraso = 0, engorda = 0;
 	int t = tecla();
-	while(t != ESCAPE) {
+	bool choque = false;
+	while(t != ESCAPE && !choque) {
 		retraso++;
 		if(t == ARRIBA) {
 			vx = 0, vy = -1;
@@ -45,6 +62,9 @@ int main() {
 			}
 			cabeza.x += vx;
 			cabeza.y += vy;
+			if(hay_choque(cabeza, cola)) {
+				choque = true;
+			}
 			retraso = 0;
 		}
 		borra();
@@ -57,6 +77,6 @@ int main() {
 		espera(30);
 		t = tecla();
 	}
-	vcierra();
+	//vcierra();
 	return 0;
 }
