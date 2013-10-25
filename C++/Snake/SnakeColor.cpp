@@ -21,7 +21,7 @@ int main() {
 	Punto cabeza = {30, 20};
 	int vx = 1, vy = 0; //velocidad
 	list<Punto> cola;
-	int retraso = 0;
+	int retraso = 0, engorda = 0;
 	int t = tecla();
 	while(t != ESCAPE) {
 		retraso++;
@@ -33,9 +33,16 @@ int main() {
 			vx = -1, vy = 0;
 		} else if(t == DERECHA) {
 			vx = 1, vy = 0;
+		} else if(t == ESPACIO) {
+			engorda = 5;
 		}
 		if(retraso == 8) {
-			cola.push_back(cabeza);
+			cola.push_front(cabeza);
+			if(engorda > 0) {
+				engorda--;
+			}else {
+				cola,pop_back();
+			}
 			cabeza.x += vx;
 			cabeza.y += vy;
 			retraso = 0;
