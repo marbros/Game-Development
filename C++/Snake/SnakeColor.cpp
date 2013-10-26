@@ -32,9 +32,15 @@ bool hay_choque(const Punto& cabeza, const list<Punto>& cola) {
 	return false;
 }
 
+Punto al_azar() {
+	Punto p = {rand() % XTAM, rand() % YTAM};
+	return p;
+}
+
 int main() {
 	vredimensiona(XTAM * SZ, YTAM * SZ);
 	Punto cabeza = {30, 20};
+	Punto comida = al_azar();
 	int vx = 1, vy = 0; //velocidad
 	list<Punto> cola;
 	int retraso = 0, engorda = 0;
@@ -74,6 +80,7 @@ int main() {
 				cuadrado(*it, VERDE);
 			}
 			cuadrado(cabeza, ROJO);
+			cuadrado(comida, AMARILLO);
 			refresca();
 		}
 		espera(30);
