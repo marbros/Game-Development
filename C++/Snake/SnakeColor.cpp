@@ -56,8 +56,6 @@ int main() {
 			vx = -1, vy = 0;
 		} else if(t == DERECHA) {
 			vx = 1, vy = 0;
-		} else if(t == ESPACIO) {
-			engorda = 5;
 		}
 		if(retraso == 8) {
 			cola.push_front(cabeza);
@@ -70,6 +68,9 @@ int main() {
 			cabeza.y += vy;
 			if(hay_choque(cabeza, cola)) {
 				choque = true;
+			} else if(cabeza.x == comida.x && cabeza.y = = comida.y) {
+				engorda = 5;
+				comida = al_azar();
 			}
 			retraso = 0;
 		}
