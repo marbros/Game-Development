@@ -71,6 +71,9 @@ int main() {
 			} else if(cabeza.x == comida.x && cabeza.y = = comida.y) {
 				engorda = 5;
 				comida = al_azar();
+				if(hay_choque(comida, cola) || comida.y == cabeza.y) {
+					comida = al_azar();
+				}
 			}
 			retraso = 0;
 		}
