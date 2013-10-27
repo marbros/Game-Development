@@ -1,7 +1,7 @@
-#include <windows.h>
 #include <iostream>
-#include "miniwin.h"
 #include <list>;
+#include "miniwin.h"
+#include <stdio.h>
 
 using namespace miniwin;
 using namespace std;
@@ -12,36 +12,6 @@ const int SZ = 12;
 struct Punto {
 	int x, y;
 };
-
-void gotoxy(int x, int y) {
-	HANDLE hCon;
-	COORD dwPos;
-
-	dwPos.X = x;
-	dwPos.Y = y;
-	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleCursorPosition(hCon,dwPos);
-}
-
-void pintar() {
-	//lineas hori
-	for (int i = 2; i < 78; ++i) {
-	 	gotoxy(i,3);
-	 	printf("%c", 205);
-		gotoxy(i,23);
-		printf("%c", 205);
-	}
-	//lineas Ver
-	for (int i = 4; i < 23; ++i) {
-	 	gotoxy(2,i); printf("%c", 186);
-		gotoxy(77,i); printf("%c", 186);
-	}
-	//Esquinas
-	gotoxy(2,3); printf("%c",201);
-	gotoxy(2,23); printf("%c",200);
-	gotoxy(77,3); printf("%c",187);
-	gotoxy(77,23); printf("%c",188);
-}
 
 void cuadrado(const Punto& p, int c) {
 	color(c);
@@ -71,7 +41,6 @@ Punto al_azar() {
 
 int main() {
 	vredimensiona(XTAM * SZ, YTAM * SZ);
-	pintar();
 	Punto cabeza = {30, 20};
 	Punto comida = al_azar();
 	int vx = 1, vy = 0; //velocidad
@@ -95,13 +64,13 @@ int main() {
 			if(engorda > 0) {
 				engorda--;
 			}else {
-				cola,pop_back();
+				cola.pop_back();
 			}
 			cabeza.x += vx;
 			cabeza.y += vy;
 			if(hay_choque(cabeza, cola)) {
 				choque = true;
-			} else if(cabeza.x == comida.x && cabeza.y = = comida.y) {
+			} else if(cabeza.x == comida.x && cabeza.y == comida.y) {
 				engorda = 5;
 				comida = al_azar();
 				if(hay_choque(comida, cola) || comida.y == cabeza.y) {
