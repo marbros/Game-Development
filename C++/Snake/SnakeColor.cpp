@@ -1,3 +1,5 @@
+#include <windows.h>
+#include <iostream>
 #include "miniwin.h"
 #include <list>;
 
@@ -10,6 +12,16 @@ const int SZ = 12;
 struct Punto {
 	int x, y;
 };
+
+void gotoxy(int x, int y) {
+	HANDLE hCon;
+	COORD dwPos;
+
+	dwPos.X = x;
+	dwPos.Y = y;
+	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hCon,dwPos);
+}
 
 void cuadrado(const Punto& p, int c) {
 	color(c);
