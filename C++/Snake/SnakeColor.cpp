@@ -1,7 +1,7 @@
 #include <iostream>
 #include <list>;
 #include "miniwin.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 using namespace miniwin;
 using namespace std;
@@ -39,6 +39,18 @@ Punto al_azar() {
 	return p;
 }
 
+void direccion() {
+    if(t == ARRIBA) {
+		vx = 0, vy = -1;
+	} else if(t == ABAJO) {
+		vx = 0, vy = 1;
+	} else if(t == IZQUIERDA) {
+		vx = -1, vy = 0;
+	} else if(t == DERECHA) {
+		vx = 1, vy = 0;
+	}
+}
+
 int main() {
 	vredimensiona(XTAM * SZ, YTAM * SZ);
 	Punto cabeza = {30, 20};
@@ -50,15 +62,7 @@ int main() {
 	bool choque = false;
 	while(t != ESCAPE && !choque) {
 		retraso++;
-		if(t == ARRIBA) {
-			vx = 0, vy = -1;
-		} else if(t == ABAJO) {
-			vx = 0, vy = 1;
-		} else if(t == IZQUIERDA) {
-			vx = -1, vy = 0;
-		} else if(t == DERECHA) {
-			vx = 1, vy = 0;
-		}
+		direccion();
 		if(retraso == 8) {
 			cola.push_front(cabeza);
 			if(engorda > 0) {
