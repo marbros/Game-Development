@@ -1,8 +1,11 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
+#include <iostream>
+#include <cmath>
 
 class vector3d{
 	public:
+	  float x,y,z;
 	  float3d();
 	  vector3d();
 	  vector3d(float a, float b);
@@ -28,6 +31,13 @@ class vector3d{
 	  vector3d& operator-=(const vector3d& vec2);
 	  vector3d& operator*=(float vec2);
 	  vector3d& operator/=(float vec2);
+
+	  bool operator==(const vector3d vec2);
+	  bool operator!=(const vector3d vec2);
+
+	  cout << vec;
+
+	  friend std::ostream& operator<<(std::ostream& out, const vector3d& vec);
 };
 
 #endif
