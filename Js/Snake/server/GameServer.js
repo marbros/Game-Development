@@ -22,6 +22,44 @@ GameServer.prototype = {
         this.bindSocketsEvents();
     },
 
+    bindModelEvents : function () {
+    },
+
+    bindSocketsEvents : function () {
+    },
+
+    onSocketAddPlayer : function (socket, username) {
+    },
+
+    onSocketDisconnect : function (socket) {
+    },
+
+    onSocketKeydown : function (socket, key) {
+    },
+
+    detectCollisions : function () {
+
+    },
+
+    updateData : function () {
+
+    },
+
+    gameLoop : function () {
+
+    },
+
+    addFood : function () {
+
+    },
+
+    startIntervals : function () {
+
+    },
+
+    stopIntervals : function () {
+
+    }
 };
 
 module.exports = GameServer;
