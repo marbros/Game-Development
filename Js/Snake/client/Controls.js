@@ -28,7 +28,14 @@
             $(document).off(".gameControl");
         },
 
-
+        keydown : function (e) {
+            var key = e.which;
+            if (KEY_NAMES_INV[key]) {
+                e.preventDefault();
+                this.keys[KEY_NAMES_INV[key]] = true;
+                this.trigger("keydown", KEY_NAMES_INV[key]);
+            }
+        }
     };
 
 
