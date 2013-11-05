@@ -26,6 +26,12 @@ GameServer.prototype = {
     },
 
     bindSocketsEvents : function () {
+        var self = this;
+        this.io.sockets.on('connection', function (socket) {
+            socket.on('addPlayer', _.bind(self.onSocketAddPlayer, self, socket));
+            socket.on('disconnect', _.bind(self.onSocketDisconnect, self, socket));
+            socket.on('keydown', _.bind(self.onSocketKeydown, self, socket));
+        });
     },
 
     onSocketAddPlayer : function (socket, username) {
