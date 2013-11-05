@@ -1,0 +1,5 @@
+node_modules
+*.iml
+atlassian-ide-plugin.xml
+newrelic.js
+newrelic_agent.log
