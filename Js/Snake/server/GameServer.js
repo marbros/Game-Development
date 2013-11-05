@@ -35,6 +35,11 @@ GameServer.prototype = {
     },
 
     onSocketAddPlayer : function (socket, username) {
+        console.log('Add player' + username);
+        this.players.add({username : username, socket : socket, board : this.board});
+        if (this.players.length === 1) {
+            this.startIntervals();
+        }
     },
 
     onSocketDisconnect : function (socket) {
