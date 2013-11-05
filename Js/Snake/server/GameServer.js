@@ -65,11 +65,22 @@ GameServer.prototype = {
     },
 
     startIntervals : function () {
-
+        this.stopIntervals();
+        console.log("start intervals");
+        this.gameLoopIntervalesId = setInterval(_.bind(this.gameLoop, this), 100);
+        this.addFoodIntervalId = setInterval(_.bind(this.addFood, this), 3000);
     },
 
     stopIntervals : function () {
+        console.log("stop intervals");
 
+        if (this.gameLoopIntervalesId) {
+            clearInterval(this.gameLoopIntervalesId);
+        }
+
+        if (this.addFoodIntervalId) {
+            clearInterval(this.addFoodIntervalId);
+        }
     }
 };
 
