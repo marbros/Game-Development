@@ -43,6 +43,13 @@ GameServer.prototype = {
     },
 
     onSocketDisconnect : function (socket) {
+        var player = this.players.get(socket.id);
+        if (player) {
+            this.players.remove(player);
+        }
+        if (this.players.length === 0) {
+            this.stopIntervals();
+        }
     },
 
     onSocketKeydown : function (socket, key) {
