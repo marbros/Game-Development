@@ -64,7 +64,13 @@ GameServer.prototype = {
     },
 
     gameLoop : function () {
+        this.players.invoke('movePosition');
+        this.detectCollisions();
+        var data = this.updateData();
 
+        this.players.each(function (player) {
+            player.get('socket').emit('update', data);
+        });
     },
 
     addFood : function () {
