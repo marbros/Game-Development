@@ -60,7 +60,21 @@ GameServer.prototype = {
     },
 
     updateData : function () {
-
+        var data = {};
+        if (this.updateDataFields.players) {
+            data.players = this.players.toJSON();
+        }
+        if (this.updateDataFields.food) {
+            data.food = this.foodCollection.toJSON();
+        }
+        if (this.updateDataFields.board) {
+            data.board = this.board.toJSON();
+        }
+        if (this.updateDataFields.scores) {
+            data.scores = this.players.invoke("pick", "username", "score", "maxScore");
+        }
+        this.updateDataFields = {players : true};
+        return data;
     },
 
     gameLoop : function () {
