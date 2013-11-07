@@ -23,6 +23,25 @@ GameServer.prototype = {
     },
 
     bindModelEvents : function () {
+        var self = this;
+
+        var includeScores = function () {
+            self.updateDataFields.scores = true;
+        };
+        this.players.on('add', includeScores);
+        this.players.on('remove', includeScores);
+        this.players.on('change:score', includeScores);
+
+        var includeFood = function () {
+            self.updateDataFields.food = true;
+        };
+        this.foodCollection.on('add', includeFood);
+        this.foodCollection.on('remove', includeFood);
+        this.players.on('add', includeFood);
+
+        this.players.on('add', function () {
+            self.updateDataFields.board = true;
+        });
     },
 
     bindSocketsEvents : function () {
