@@ -22,6 +22,12 @@
 
         var scoresViewEl = this.$el.find('.scoresContainer tbody');
         this.scoresView = new Game.ScoresView({el : scoresViewEl, collection : this.scores});
+
+        var controls = new Game.Controls();
+        controls.on('keydown', function (key) {
+            socket.emit('keydown', key);
+        });
+        controls.start();        
     };
 
 }());
