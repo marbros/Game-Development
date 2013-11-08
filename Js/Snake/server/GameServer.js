@@ -107,7 +107,11 @@ GameServer.prototype = {
     },
 
     addFood : function () {
-
+        if (this.foodCollection.length < 10) {
+            var x = _.random(0, this.board.get('x') - 1);
+            var y = _.random(0, this.board.get('y') - 1);
+            this.foodCollection.add({x : x, y : y});
+        }
     },
 
     startIntervals : function () {
