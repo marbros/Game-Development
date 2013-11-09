@@ -72,6 +72,8 @@ GameServer.prototype = {
     },
 
     onSocketKeydown : function (socket, key) {
+        var player = this.players.get(socket.id);
+        player.set('lastKey', key);
     },
 
     detectCollisions : function () {
