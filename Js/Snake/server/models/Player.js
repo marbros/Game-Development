@@ -48,7 +48,18 @@ var Player = Backbone.Model.extend({
     },
 
     calculateNewDirection : function () {
+        var key = this.get('lastKey');
+        var direction = this.get('direction');
 
+        if (key === "LEFT" && direction.y) {
+            this.set('direction', {x : -1, y : 0});
+        } else if (key === "RIGHT" && direction.y) {
+            this.set('direction', {x : 1, y : 0});
+        } else if (key === "UP" && direction.x) {
+            this.set('direction', {x : 0, y : -1});
+        } else if (key === "DOWN" && direction.x) {
+            this.set('direction', {x : 0, y : 1});
+        }
     },
 
     die : function () {
