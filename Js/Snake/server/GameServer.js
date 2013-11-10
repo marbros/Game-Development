@@ -77,9 +77,39 @@ GameServer.prototype = {
     },
 
     detectCollisions : function () {
+        var playersParts = this.players.pluck('parts');
 
+        var heads = _.map(playersParts, function (parts) {
+            return _.first(parts);
+        });
+
+        //Collisions
+        _.each(heads, function (head, i) {
+            var collidedFood = this.foodCollection.find(function (food) {
+                return head.x === food.get('x') && head.y === food.get('y');
+            });
+
+            if (collidedFood) {
+                this.foodCollection.remove(collidedFood);
+                this.players.at(i).eat();
+            }
+
+            var collidedPlayer = _.find(playersParts, function (parts, j) {
+                if (i === j) {
+                    parts = parts.slice(1);
+                }
+                var collidedPart = _.find(parts, function (part) {
+                    return head.x === part.x && head.y === part.y;
+                });
+                return !_.isUndefined(collidedPart);
+            });
+
+            if (collidedPlayer) {
+                this.players.at(i).die();
+            }
+
+        }, this);
     },
-
     updateData : function () {
         var data = {};
         if (this.updateDataFields.players) {
