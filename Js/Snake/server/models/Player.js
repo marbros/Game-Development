@@ -63,11 +63,19 @@ var Player = Backbone.Model.extend({
     },
 
     die : function () {
-
+        var parts = this.get('parts').slice(0, 1);
+        this.set('parts', parts);
+        this.set('score', 0);
     },
 
     eat : function () {
+        this.get('parts').push(this.lastRemovedPart);
 
+        var score = this.get('score') + 1;
+        this.set('score', score);
+        if (score > this.get('maxScore')) {
+            this.set('maxScore', score);
+        }
     },
 
     toJSON : function () {
