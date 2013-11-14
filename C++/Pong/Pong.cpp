@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <conio.h>
 #include ""
 
 class JUGADOR {
@@ -6,7 +7,8 @@ class JUGADOR {
 	public:
 		JUGADOR(int _x, int _y);
 		void pintar() const;
-		void borrar() const;	
+		void borrar() const;
+		void Y(int _y) { y += _y; }	
 };
 
 JUGADOR::JUGADOR(int _x, int _y):x(_x), y(_y) {}
@@ -29,5 +31,19 @@ int main() {
 	A.pintar();
 	JUGADOR B(74,15);
 	B.pintar();
+
+	char tecla;
+	while(1) {
+		
+		if(kbhit()) {
+			A.borrar();	B.borrar();
+			tecla = getch();
+			if(tecla == 'q') A.Y(-1); else if(tecla == 'a') A.Y(1);
+			if(tecla == 'o') B.Y(-1); else if(tecla == 'l') B.Y(1);
+			A.pintar(); B.pintar();
+		}
+
+		pausa(10);
+	}
 	return 0;
 }
