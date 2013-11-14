@@ -9,6 +9,7 @@ class JUGADOR {
 		void pintar() const;
 		void borrar() const;
 		void Y(int _y) { y += _y; }	
+		int RY() { return y; }
 };
 
 JUGADOR::JUGADOR(int _x, int _y):x(_x), y(_y) {}
@@ -38,8 +39,8 @@ int main() {
 		if(kbhit()) {
 			A.borrar();	B.borrar();
 			tecla = getch();
-			if(tecla == 'q') A.Y(-1); else if(tecla == 'a') A.Y(1);
-			if(tecla == 'o') B.Y(-1); else if(tecla == 'l') B.Y(1);
+			if(tecla == 'q' && A.RY() > 5) A.Y(-1); else if(tecla == 'a' && A.RY() < 21) A.Y(1);
+			if(tecla == 'o' && A.RY() > 5) B.Y(-1); else if(tecla == 'l' && B.RY() < 21) B.Y(1);
 			A.pintar(); B.pintar();
 		}
 
