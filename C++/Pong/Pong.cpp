@@ -26,6 +26,29 @@ void JUGADOR::borrar() const {
 	gotoxy(x, y+1); printf("%c", " ");	
 }
 
+class PELOTA
+{
+	int x,y;
+	int dx, dy;
+public:
+	PELOTA(int _x, int _y, int dx, int dy);
+	void pintar() const;
+	void borrar() const;
+	void mover();
+	~PELOTA();
+
+};
+
+PELOTA::PELOTA(int _x, int _y, int dx, int dy) : x(_x), y(_y), dx(_dx), dy(_dy) {}
+
+PELOTA::pintar() const {
+	gotoxy(x,y); printf("%c", 184);
+}
+
+PELOTA::pintar() const {
+	gotoxy(x,y); printf(" ");
+}
+
 int main() {
 	
 	JUGADOR A(6,15);
