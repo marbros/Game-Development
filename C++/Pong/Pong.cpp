@@ -39,14 +39,21 @@ public:
 
 };
 
-PELOTA::PELOTA(int _x, int _y, int dx, int dy) : x(_x), y(_y), dx(_dx), dy(_dy) {}
+void PELOTA::PELOTA(int _x, int _y, int dx, int dy) : x(_x), y(_y), dx(_dx), dy(_dy) {}
 
 PELOTA::pintar() const {
 	gotoxy(x,y); printf("%c", 184);
 }
 
-PELOTA::pintar() const {
+void PELOTA::borrar() const {
 	gotoxy(x,y); printf(" ");
+}
+
+void PELOTA::mover() {
+	borrar();
+	x += dx; y += dy;
+	pintar();
+
 }
 
 int main() {
