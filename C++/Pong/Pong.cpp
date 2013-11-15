@@ -53,6 +53,13 @@ void PELOTA::mover() {
 	borrar();
 	x += dx; y += dy;
 	pintar();
+	if(x + dx == 3 || x + dx == 76) {
+		borrar();
+		dx =- dx;
+	} 
+	if(y + dy == 3 || y + dy == 23) {
+		dy = -dy;
+	}
 
 }
 
@@ -62,6 +69,7 @@ int main() {
 	A.pintar();
 	JUGADOR B(74,15);
 	B.pintar();
+	PELOTA P(38,14,1,1)
 
 	char tecla;
 	while(1) {
@@ -73,7 +81,7 @@ int main() {
 			if(tecla == 'o' && A.RY() > 5) B.Y(-1); else if(tecla == 'l' && B.RY() < 21) B.Y(1);
 			A.pintar(); B.pintar();
 		}
-
+		P.mover();
 		pausa(10);
 	}
 	return 0;
