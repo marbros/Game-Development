@@ -10,6 +10,7 @@ class JUGADOR {
 		void borrar() const;
 		void Y(int _y) { y += _y; }	
 		int RY() { return y; }
+		int RX() { return x; }
 };
 
 JUGADOR::JUGADOR(int _x, int _y):x(_x), y(_y) {}
@@ -34,7 +35,8 @@ public:
 	PELOTA(int _x, int _y, int dx, int dy);
 	void pintar() const;
 	void borrar() const;
-	void mover();
+	void mover(JUGADOR A, JUGADOR B);
+	void asign(int _x, int _y) { x = _x; y = _y;}
 	~PELOTA();
 
 };
@@ -49,16 +51,24 @@ void PELOTA::borrar() const {
 	gotoxy(x,y); printf(" ");
 }
 
-void PELOTA::mover() {
+void PELOTA::mover(JUGADOR A, JUGADOR B) {
 	borrar();
 	x += dx; y += dy;
 	pintar();
 	if(x + dx == 3 || x + dx == 76) {
 		borrar();
+		asign(38,14);
 		dx =- dx;
 	} 
 	if(y + dy == 3 || y + dy == 23) {
 		dy = -dy;
+	}
+
+	if(x + dx == A.RX() && y >= A.RY()-2 && y <= A.RY() +2) {
+		dx = -dx;
+	}
+	if(x + dx == B.RX() && y >= B.RY()-2 && y <= B.RY() +2) {
+		dx = -dx;
 	}
 
 }
@@ -82,7 +92,7 @@ int main() {
 			if(tecla == 'o' && A.RY() > 5) B.Y(-1); else if(tecla == 'l' && B.RY() < 21) B.Y(1);
 			A.pintar(); B.pintar();
 		}
-		if(!cont++) P.mover();
+		if(!cont++) P.mover(A,B);
 		if(cont > 5) cont = 0;
 		pausa(10);
 	}
