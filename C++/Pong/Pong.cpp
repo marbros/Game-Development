@@ -72,6 +72,7 @@ int main() {
 	PELOTA P(38,14,1,1)
 
 	char tecla;
+	int cont = 0;
 	while(1) {
 		
 		if(kbhit()) {
@@ -81,7 +82,8 @@ int main() {
 			if(tecla == 'o' && A.RY() > 5) B.Y(-1); else if(tecla == 'l' && B.RY() < 21) B.Y(1);
 			A.pintar(); B.pintar();
 		}
-		P.mover();
+		if(!cont++) P.mover();
+		if(cont > 5) cont = 0;
 		pausa(10);
 	}
 	return 0;
