@@ -2,6 +2,7 @@
 #include <conio.h>
 #include "pong.h"
 #include <stdio.h>
+#include <conio.h>
 
 JUGADOR::JUGADOR(int _x, int _y):x(_x), y(_y) {}
 
@@ -47,7 +48,9 @@ void PELOTA::mover(JUGADOR A, JUGADOR B) {
 		dx = -dx;
 	}
 
-}void MENU::pintar_portada(int &a) {
+}
+
+void MENU::pintar_portada(int &a) {
 
     char portada[18][71] =
     {
@@ -68,5 +71,23 @@ void PELOTA::mover(JUGADOR A, JUGADOR B) {
     "   aass  aa    aas  aas    aas  aaaaaaaas                             ",
     "   aass    aaaas    aas    aas   aaaaa a                              ",
 
-    };	
+    };
+
+    for(int i = 0; i < 16; i++) {
+    	for (int j = 0; j < 70; ++j)
+    	{
+    		gotoxy(j + 5,i + 5);
+    		printf("%c", portada[i][j]);
+    	}
+    }
+
+    a = getch();
+
+    for(int i = 0; i < 16; i++) {
+    	for (int j = 0; j < 70; ++j)
+    	{
+    		gotoxy(j + 5,i + 5);
+    		printf("%c", " ");
+    	}
+    }   	
 }
