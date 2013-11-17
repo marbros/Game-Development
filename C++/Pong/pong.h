@@ -22,3 +22,12 @@ public:
 	~PELOTA();
 
 };
+
+class MENU
+{
+public:
+	void pintar_portada(int &a);
+	~MENU();
+
+	/* data */
+};
