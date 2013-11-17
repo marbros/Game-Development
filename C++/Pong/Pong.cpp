@@ -1,17 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
-#include ""
-
-class JUGADOR {
-	int x,y;
-	public:
-		JUGADOR(int _x, int _y);
-		void pintar() const;
-		void borrar() const;
-		void Y(int _y) { y += _y; }	
-		int RY() { return y; }
-		int RX() { return x; }
-};
+#include "pong.h"
+#include <stdio.h>
 
 JUGADOR::JUGADOR(int _x, int _y):x(_x), y(_y) {}
 
@@ -26,20 +16,6 @@ void JUGADOR::borrar() const {
 	gotoxy(x, y); printf("%c", " ");
 	gotoxy(x, y+1); printf("%c", " ");	
 }
-
-class PELOTA
-{
-	int x,y;
-	int dx, dy;
-public:
-	PELOTA(int _x, int _y, int dx, int dy);
-	void pintar() const;
-	void borrar() const;
-	void mover(JUGADOR A, JUGADOR B);
-	void asign(int _x, int _y) { x = _x; y = _y;}
-	~PELOTA();
-
-};
 
 void PELOTA::PELOTA(int _x, int _y, int dx, int dy) : x(_x), y(_y), dx(_dx), dy(_dy) {}
 
@@ -71,30 +47,4 @@ void PELOTA::mover(JUGADOR A, JUGADOR B) {
 		dx = -dx;
 	}
 
-}
-
-int main() {
-	
-	JUGADOR A(6,15);
-	A.pintar();
-	JUGADOR B(74,15);
-	B.pintar();
-	PELOTA P(38,14,1,1)
-
-	char tecla;
-	int cont = 0;
-	while(1) {
-		
-		if(kbhit()) {
-			A.borrar();	B.borrar();
-			tecla = getch();
-			if(tecla == 'q' && A.RY() > 5) A.Y(-1); else if(tecla == 'a' && A.RY() < 21) A.Y(1);
-			if(tecla == 'o' && A.RY() > 5) B.Y(-1); else if(tecla == 'l' && B.RY() < 21) B.Y(1);
-			A.pintar(); B.pintar();
-		}
-		if(!cont++) P.mover(A,B);
-		if(cont > 5) cont = 0;
-		pausa(10);
-	}
-	return 0;
 }
