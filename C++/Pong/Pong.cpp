@@ -23,6 +23,7 @@ void JUGADOR::mover_cpu(int _x, int _y, int _dx) {
         borrar();
         if(_y > y && y+1 < 22) y++;
         if(_y < y && y-1 > 4) y--;
+        pintar();
     }
 }
 
