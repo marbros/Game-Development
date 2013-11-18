@@ -3,16 +3,18 @@
 #include "pong.h"
 
 int main() {
-	
+
+	int cont = 0, op_juego;	
+	MENU M;	
+	M.pintar_portada(op_juego);	
 	JUGADOR A(6,15);
 	A.pintar();
 	JUGADOR B(74,15);
 	B.pintar();
-	MENU M;
+
 	PELOTA P(38,14,1,1)
 
 	char tecla;
-	int cont = 0, op_juego;
 	M.pintar_portada(op_juego);
 	while(1) {
 		

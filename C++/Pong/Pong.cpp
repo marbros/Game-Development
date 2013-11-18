@@ -18,6 +18,14 @@ void JUGADOR::borrar() const {
 	gotoxy(x, y+1); printf("%c", " ");	
 }
 
+void JUGADOR::mover_cpu(int _x, int _y, int _dx) {
+    if( _x > 65 && _dx > 0) {
+        borrar();
+        if(_y > y && y+1 < 22) y++;
+        if(_y < y && y-1 > 4) y--;
+    }
+}
+
 void PELOTA::PELOTA(int _x, int _y, int dx, int dy) : x(_x), y(_y), dx(_dx), dy(_dy) {}
 
 PELOTA::pintar() const {
