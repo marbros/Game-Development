@@ -15,7 +15,6 @@ int main() {
 	PELOTA P(38,14,1,1)
 
 	char tecla;
-	M.pintar_portada(op_juego);
 	while(1) {
 		
 		if(kbhit()) {
