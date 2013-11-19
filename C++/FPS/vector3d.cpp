@@ -27,6 +27,33 @@ vector3d vector3d::crossProduct(const vector3d& vec2) {
 					x*vec2.y - y*vec2.x);
 }
 
+float vector3d::length() {
+	sqrt(x*x+y*y*z*z);
+}
+
+void vector3d::normalize() {
+	float len = length();
+	if(len != 0) {
+		x/=len;
+		y/=len;
+		z/=len;
+	}
+}
+
+void vector3d::change(float a, float b, float c) 
+{
+	x = a;
+	y = b;
+	z = c;	
+}
+
+void vector3d::change(vector3d& vec2) 
+{
+	x = vec2.x;
+	y = vec2.y;
+	z = vec2.z;	
+}
+
 vector3d::vector3d();
 	  vector3d::vector3d(float a, float b);
 	  vector3d::vector3d(float a, float b, float c);
