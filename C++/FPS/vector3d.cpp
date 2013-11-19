@@ -17,6 +17,16 @@ vector3d::vector3d(float a, float b, float c) {
 	z = c;
 }
 
+float vector3d::vector3d(float a, float b, float c) {
+	return (x*vec2.x + y*vec2.y + z*vec2.z);
+}
+
+vector3d vector3d::crossProduct(const vector3d& vec2) {
+	return vector3d(y*vec2.z - z*vec2.y,
+					x*vec2.z - z*vec2.x,
+					x*vec2.y - y*vec2.x);
+}
+
 vector3d::vector3d();
 	  vector3d::vector3d(float a, float b);
 	  vector3d::vector3d(float a, float b, float c);
