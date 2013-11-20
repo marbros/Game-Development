@@ -54,6 +54,27 @@ void vector3d::change(vector3d& vec2)
 	z = vec2.z;	
 }
 
+void vector3d::change(vector3d& vec2) 
+{
+	x = vec2.x;
+	y = vec2.y;
+	z = vec2.z;	
+}
+
+void vector3d::changeX(float a) 
+{
+	x = a;
+}
+
+void vector3d::changeY(float a) 
+{
+	y = a;
+}
+
+void vector3d::changeZ(float a) 
+{
+	z = a;
+}
 vector3d::vector3d();
 	  vector3d::vector3d(float a, float b);
 	  vector3d::vector3d(float a, float b, float c);
