@@ -88,13 +88,16 @@ vector3d vector3d::operator-(const vector3d& vec2)
 
 vector3d vector3d::operator*(const vector3d& vec2)
 {
-	return vector3d(x*vec2.x, y*vec2.y, z*vec2.z);
+	return vector3d(x*num, y*num, z*num);
 }
 
 vector3d vector3d::operator/(const vector3d& vec2)
-{
-	return vector3d(x/vec2.x, y/vec2.y, z/vec2.z);
+{	if(num != 0)
+		return vector3d(x/num, y/num, z/num);
+	else
+		return vector3d();
 }
+
 vector3d::vector3d();
 	  vector3d::vector3d(float a, float b);
 	  vector3d::vector3d(float a, float b, float c);
