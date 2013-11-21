@@ -98,6 +98,50 @@ vector3d vector3d::operator/(const vector3d& vec2)
 		return vector3d();
 }
 
+vector3d& vector3d::operator+=(const vector3d& vec2)
+{
+	x += vec2.x;
+	y += vec2.y;
+	z += vec2.z;
+	return *this;	
+}
+
+vector3d& vector3d::operator-=(const vector3d& vec2)
+{
+	x -= vec2.x;
+	y -= vec2.y;
+	z -= vec2.z;
+	return *this;	
+}
+
+vector3d& vector3d::operator*=(const vector3d& vec2)
+{
+	x *= vec2.x;
+	y *= vec2.y;
+	z *= vec2.z;
+	return *this;	
+}
+
+vector3d& vector3d::operator/=(const vector3d& vec2)
+{
+	if(num != 0) {
+		x /= vec2.x;
+		y /= vec2.y;
+		z /= vec2.z;
+	}
+	return *this;	
+}
+
+bool vector3d::operator==(const vector3d& vec2)
+{
+	return (x == vec2.x && y == vec2.y && z == vec2.z);
+}
+
+bool vector3d::operator!=(const vector3d& vec2)
+{
+	!(*this == vec2);
+}
+
 vector3d::vector3d();
 	  vector3d::vector3d(float a, float b);
 	  vector3d::vector3d(float a, float b, float c);
