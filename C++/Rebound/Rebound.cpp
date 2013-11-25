@@ -1,19 +1,19 @@
 #include "miniwin.h"
 using namespace miniwin;
 
-const int XTAM = 800;
-const int YTAM = 600;
-const int RADIO = 30;
+const int XTAM = 400;
+const int YTAM = 300;
+const int RADIO = 15;
 
 int main() {
 	vredimensiona(XTAM, YTAM);
-	int x = 50, y= 50;
-	int dx = 2, dy =2; 
+	float x = 50, y= 50;
+	float dx = 2, dy =2; 
 	while (tecla() != ESCAPE)
 	{
 		/* Pasos para crear una Animacion borrar, pintar, refrescar */
 		borra();
-		circulo(x, y, 30);
+		circulo(x, y, RADIO);
 		refresca();
 		x += dx;
 		y += dy;
@@ -25,6 +25,7 @@ int main() {
 		if (y > YTAM - RADIO || y < RADIO) {
 			dy = -dy;
 		}
+		dy += 0.3;
 		espera(10);
 	}
 	vcierra();
