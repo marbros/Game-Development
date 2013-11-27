@@ -142,7 +142,7 @@ bool vector3d::operator!=(const vector3d& vec2)
 	!(*this == vec2);
 }
 
-friend std::ostream& vector3d::operator<<(std::ostream&out, const vector3d& vec) 
+std::ostream& operator<<(std::ostream&out, const vector3d& vec) 
 {
 	out << vec.x << " " << vec.y << " " << vec.z << std::endl;
 	return out;
