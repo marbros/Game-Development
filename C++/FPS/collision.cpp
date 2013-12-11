@@ -22,3 +22,8 @@ bool collision::raysphere(float xc, float yc, float zc, float xd, floar yd,float
 	return true;
 		//(x+y)^2=x^2+2xy+y^2
 }
+
+float collision::pointdistance(coordinate c1,, coordinate c2) {
+	coordinate vec(c2.x-c1.x,c2.y-c1.y,c2.z-c1.z);
+	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
+}
