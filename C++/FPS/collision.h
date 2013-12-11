@@ -17,7 +17,7 @@ class collision
 
 	static bool spheresphere(coordinate& c1, float r1, coordinate c2, float r2);
 
-	static float pointdistance(coordinate c1,, coordinate c2);
+	static float pointdistance(coordinate c1s, coordinate c2);
 
 	static bool sphereplane(coordinate& sp, coordinate vn, coordinate p1, coordinate p2, coordinate p3, coordinate p4, float r);
 };
