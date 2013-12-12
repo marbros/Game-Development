@@ -37,3 +37,17 @@ float collision::pointdistance(coordinate c1,, coordinate c2) {
 	coordinate vec(c2.x-c1.x,c2.y-c1.y,c2.z-c1.z);
 	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
 }
+
+bool collision::spheresphere(vector3d& c1,float r1,vector3d& c2,float r2)
+{
+	float dist=pointdistacesquare(c1,c2);
+	if(dist<=(r1+r2)*(r1+r2))
+	{
+		float a=sqrt(dist)-(r1+r2);
+		vector3d vec(c2-c1);
+		vec.normalize();
+		c1=c1+vec*a;
+		return 1;
+	}
+	return 0;
+}
