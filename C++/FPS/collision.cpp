@@ -38,6 +38,12 @@ float collision::pointdistance(coordinate c1,, coordinate c2) {
 	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
 }
 
+float collision::pointdistacesquare(vector3d p1,vector3d p2)
+{
+	vector3d vec(p2.x-p1.x,p2.y-p1.y,p2.z-p1.z);
+	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
+}
+
 bool collision::sphereplane(vector3d& sp,vector3d pn,vector3d p1,vector3d p2,vector3d p3,vector3d p4, float r)
 {
 	float dist1=0,dist2=0;
