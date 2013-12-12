@@ -38,6 +38,36 @@ float collision::pointdistance(coordinate c1,, coordinate c2) {
 	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
 }
 
+bool collision::sphereplane(vector3d& sp,vector3d pn,vector3d p1,vector3d p2,vector3d p3,vector3d p4, float r)
+{
+	float dist1=0,dist2=0;
+	//std::cout << "SP: " << sp << std::endl;
+	if(rayplane(pn.x,pn.y,pn.z,p1.x,p1.y,p1.z,sp.x,sp.y,sp.z,-pn.x,-pn.y,-pn.z,p1,p2,p3,p4,&dist1) || rayplane(-pn.x,-pn.y,-pn.z,p1.x,p1.y,p1.z,sp.x,sp.y,sp.z,pn.x,pn.y,pn.z,p1,p2,p3,p4,&dist2))
+	{
+		if(dist1>r || dist2>r)
+		{
+			//std::cout << "returning false: " << pn;
+			return false;
+		}
+		if(dist1>0)	//if not zero
+		{
+			sp.x=sp.x+pn.x*(r-dist1);	//calculate the point, and calculate our new location
+			sp.y=sp.y+pn.y*(r-dist1);
+			sp.z=sp.z+pn.z*(r-dist1);		
+		}else	//else if we are in the opposite side, then the normal vector
+		{
+			sp.x=sp.x-pn.x*(r-dist2);
+			sp.y=sp.y-pn.y*(r-dist2);
+			sp.z=sp.z-pn.z*(r-dist2);				
+		}
+
+		return true;	//we return true, to indicate the collision, but the main thing is, that we changged the sp (so the sphere position) to the new position)
+	}
+//	if(pn.x==0 && pn.y==1 && pn.z==0)
+		//std::cout << "returning false (2): " << pn << dist1 << " " << dist2 << std::endl;
+	return false;
+}
+
 bool collision::spheresphere(vector3d& c1,float r1,vector3d& c2,float r2)
 {
 	float dist=pointdistacesquare(c1,c2);
