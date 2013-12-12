@@ -44,6 +44,20 @@ float collision::pointdistacesquare(vector3d p1,vector3d p2)
 	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
 }
 
+bool collision::rayplane(const float& nx,float ny,float nz,float x0,float y0,float z0,float xs,float ys,float zs,float xd,float yd,float zd,vector3d p1,vector3d p2,vector3d p3,vector3d p4,float* dis,vector3d* point)
+{
+	if((xd*nx+yd*ny+zd*nz)==0)	//if the two vector dot product is 0, then there is no intersection (we don't like to divide by 0)
+	{
+//		if(nx==0 && ny==1 && nz==0)
+		//std::cout << "parallel, return false " << nx << " " << ny << " " << nz << std::endl;
+		return false;
+	}
+
+//	if(nx==0 && ny==1 && nz==0)
+	//	//std::cout << "area not equal " << nx << " " << ny << " " << nz << "areas " << trianglearea(p1,p2,p3) - trianglearea(p1,p2,i) -trianglearea(p2,p3,i)-trianglearea(p1,p3,i) << " " << trianglearea(p1,p3,p4)-trianglearea(p1,p3,i)-trianglearea(p3,p4,i)-trianglearea(p1,p4,i) << " " << xs << " " << ys << " " << zs << std::endl;
+	return false;	//else not
+}
+
 bool collision::sphereplane(vector3d& sp,vector3d pn,vector3d p1,vector3d p2,vector3d p3,vector3d p4, float r)
 {
 	float dist1=0,dist2=0;
