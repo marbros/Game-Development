@@ -64,6 +64,22 @@ bool collision::rayplane(const float& nx,float ny,float nz,float x0,float y0,flo
 	float z=zs+t*zd;
 	vector3d i(x,y,z);
 		//std::cout << "collisionpoint: " << x << " " << y << " " << z << std::endl << "center point: " << xs << " " << ys << " " << zs << std::endl << std::endl;	
+	if((std::abs(trianglearea(p1,p2,p3)-(trianglearea(p1,p2,i)+trianglearea(p2,p3,i)+trianglearea(p1,p3,i)))<0.3) || std::abs(trianglearea(p1,p3,p4)-(trianglearea(p1,p3,i)+trianglearea(p3,p4,i)+trianglearea(p1,p4,i)))<0.3)	//we divide the quad to 2 triangle, we divide one triangle to 3 (one point is the
+	//intersection point), and if the area of the 3 triangle is equal to the main triangle, then the point is inside the triangle. We do the same with
+	//the other triangle, and if one is true, then the point is in the quad
+	{
+		if(dis!=NULL)
+		{
+			(*dis)=t;
+			if(point!=NULL)
+			{
+				point->x=x;
+				point->y=y;
+				point->z=z;
+			}
+		}
+		return true;
+	}
 //	if(nx==0 && ny==1 && nz==0)
 	//	//std::cout << "area not equal " << nx << " " << ny << " " << nz << "areas " << trianglearea(p1,p2,p3) - trianglearea(p1,p2,i) -trianglearea(p2,p3,i)-trianglearea(p1,p3,i) << " " << trianglearea(p1,p3,p4)-trianglearea(p1,p3,i)-trianglearea(p3,p4,i)-trianglearea(p1,p4,i) << " " << xs << " " << ys << " " << zs << std::endl;
 	return false;	//else not
