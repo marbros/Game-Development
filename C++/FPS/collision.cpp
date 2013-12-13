@@ -52,7 +52,13 @@ bool collision::rayplane(const float& nx,float ny,float nz,float x0,float y0,flo
 		//std::cout << "parallel, return false " << nx << " " << ny << " " << nz << std::endl;
 		return false;
 	}
-
+	float t=((x0*nx+y0*ny+z0*nz-nx*xs-ny*ys-nz*zs)/(xd*nx+yd*ny+zd*nz));
+	if(t<0)	//if t<0, the intersction point is in the opposite direction
+	{
+//		if(nx==0 && ny==1 && nz==0)
+		//std::cout << "less than 0 return false " << nx << " " << ny << " " << nz << std::endl;
+		return false;
+	}
 //	if(nx==0 && ny==1 && nz==0)
 	//	//std::cout << "area not equal " << nx << " " << ny << " " << nz << "areas " << trianglearea(p1,p2,p3) - trianglearea(p1,p2,i) -trianglearea(p2,p3,i)-trianglearea(p1,p3,i) << " " << trianglearea(p1,p3,p4)-trianglearea(p1,p3,i)-trianglearea(p3,p4,i)-trianglearea(p1,p4,i) << " " << xs << " " << ys << " " << zs << std::endl;
 	return false;	//else not
