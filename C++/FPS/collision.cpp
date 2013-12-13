@@ -59,6 +59,11 @@ bool collision::rayplane(const float& nx,float ny,float nz,float x0,float y0,flo
 		//std::cout << "less than 0 return false " << nx << " " << ny << " " << nz << std::endl;
 		return false;
 	}
+	float x=xs+t*xd;	//calculate the 3 point vector3d
+	float y=ys+t*yd;
+	float z=zs+t*zd;
+	vector3d i(x,y,z);
+		//std::cout << "collisionpoint: " << x << " " << y << " " << z << std::endl << "center point: " << xs << " " << ys << " " << zs << std::endl << std::endl;	
 //	if(nx==0 && ny==1 && nz==0)
 	//	//std::cout << "area not equal " << nx << " " << ny << " " << nz << "areas " << trianglearea(p1,p2,p3) - trianglearea(p1,p2,i) -trianglearea(p2,p3,i)-trianglearea(p1,p3,i) << " " << trianglearea(p1,p3,p4)-trianglearea(p1,p3,i)-trianglearea(p3,p4,i)-trianglearea(p1,p4,i) << " " << xs << " " << ys << " " << zs << std::endl;
 	return false;	//else not
