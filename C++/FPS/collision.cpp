@@ -32,10 +32,11 @@ float collision::trianglearea(vector3d p1,vector3d p2,vector3d p3)
 	float s=(a+b+c)/2.;
 	return (sqrt(s*((s-a)*(s-b)*(s-c))));
 }
-
-float collision::pointdistance(coordinate c1,, coordinate c2) {
-	coordinate vec(c2.x-c1.x,c2.y-c1.y,c2.z-c1.z);
-	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
+	//distance of 2 point (with 3d pythagoras formula)
+float collision::pointdistace(vector3d p1,vector3d p2)
+{
+	vector3d vec(p2.x-p1.x,p2.y-p1.y,p2.z-p1.z);
+	return (sqrt(vec.x*vec.x+vec.y*vec.y+vec.z*vec.z));
 }
 
 float collision::pointdistacesquare(vector3d p1,vector3d p2)
@@ -43,6 +44,7 @@ float collision::pointdistacesquare(vector3d p1,vector3d p2)
 	vector3d vec(p2.x-p1.x,p2.y-p1.y,p2.z-p1.z);
 	return (vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
 }
+
 
 bool collision::rayplane(const float& nx,float ny,float nz,float x0,float y0,float z0,float xs,float ys,float zs,float xd,float yd,float zd,vector3d p1,vector3d p2,vector3d p3,vector3d p4,float* dis,vector3d* point)
 {
@@ -63,7 +65,7 @@ bool collision::rayplane(const float& nx,float ny,float nz,float x0,float y0,flo
 	float y=ys+t*yd;
 	float z=zs+t*zd;
 	vector3d i(x,y,z);
-		//std::cout << "collisionpoint: " << x << " " << y << " " << z << std::endl << "center point: " << xs << " " << ys << " " << zs << std::endl << std::endl;	
+		//std::cout << "collisionpoint: " << x << " " << y << " " << z << std::endl << "center point: " << xs << " " << ys << " " << zs << std::endl << std::endl;
 	if((std::abs(trianglearea(p1,p2,p3)-(trianglearea(p1,p2,i)+trianglearea(p2,p3,i)+trianglearea(p1,p3,i)))<0.3) || std::abs(trianglearea(p1,p3,p4)-(trianglearea(p1,p3,i)+trianglearea(p3,p4,i)+trianglearea(p1,p4,i)))<0.3)	//we divide the quad to 2 triangle, we divide one triangle to 3 (one point is the
 	//intersection point), and if the area of the 3 triangle is equal to the main triangle, then the point is inside the triangle. We do the same with
 	//the other triangle, and if one is true, then the point is in the quad
