@@ -16,7 +16,11 @@ void camera::moveCamera(float dir) {
 	loc.x-=sin(rad)*mv;
 	loc.z-=cos(rad)*mv;	
 }
-	void moveCameraUp(float dir);
+
+void camera::moveCameraUp(float dir) {
+	float rad=(camPitch+dir)*M_PI/180.0;
+	camY.y+=sin(rad)*mv;		
+}
 public:
 	camera();
 	camera(vector3d loc);
