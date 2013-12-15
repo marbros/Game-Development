@@ -12,7 +12,9 @@ void camera::lockCamera() {
 }
 
 void camera::moveCamera(float dir) {
-	
+	float rad=(camYaw+dir)*M_PI/180.0;
+	loc.x-=sin(rad)*mv;
+	loc.z-=cos(rad)*mv;	
 }
 	void moveCameraUp(float dir);
 public:
