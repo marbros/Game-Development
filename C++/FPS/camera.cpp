@@ -19,13 +19,43 @@ void camera::moveCamera(float dir) {
 
 void camera::moveCameraUp(float dir) {
 	float rad=(camPitch+dir)*M_PI/180.0;
-	camY.y+=sin(rad)*mv;		
+	camY.y+=sin(rad)*movevel;		
 }
-public:
-	camera();
-	camera(vector3d loc);
-	camera(vector3d loc, float yaw, float pitch);
-	camera(vector3d loc, float yaw, float pitch, float mv, float mov);
+
+camera::camera() {
+	camPitch = 0;
+	camYaw = 0;
+	movevel = 0.2;
+	mouseVel = 0.2;
+	mi = false;
+}
+
+camera::camera(vector3d l) {
+	loc.change(l);
+	camPitch = 0;
+	camYaw = 0;
+	movevel = 0.2;
+	mouseVel = 0.2;
+	mi = false;
+}
+
+camera::camera(vector3d loc, float yaw, float pitch) {
+	loc.change(l);
+	camPitch = pitch;
+	camYaw = 0;
+	movevel = 0.2;
+	mouseVel = 0.2;
+	mi = false;
+}
+
+camera::camera(vector3d loc, float yaw, float pitch, float mv, float mov) {
+	loc.change(l);
+	camPitch = pitch;
+	camYaw = yaw;
+	movevel = mv;
+	mouseVel = mov;
+	mi = false;
+}
 	void Control();
 	void UpdateCamera();
 	vector3d getVector();
