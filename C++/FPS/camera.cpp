@@ -84,6 +84,9 @@ void camera::control()
 		else if(state[SDLK_d])
 			moveCamera(270);	
 	}
+
+	glRotatef(-camPitch,1.0,0.0,0.0);
+	glRotatef(-camYaw,0.0,1.0,0.0);
 }
 
 	void UpdateCamera();
