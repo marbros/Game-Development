@@ -68,9 +68,22 @@ void camera::control()
 		int tmpx,tmpy;
 		SDL_GetMouseState(&tmpx,&tmpy);
 		camYaw+=mousespeed*(MidX-tmpx);
-		camPitch+=mousespeed*(MidY-tmpy);	
+		camPitch+=mousespeed*(MidY-tmpy);
+		lockCamera();
+		SDL_WarpMouse(MidX,MidY);
+		Uint8* state=SDL_GetKeyState(NULL);
+		if(state[SDLK_w])
+		{
+				moveCamera(0.0);
+		}else if(state[SDLK_s])
+		{
+				moveCamera(180.0);
+		}		
+		if(state[SDLK_a])
+			moveCamera(90.0);
+		else if(state[SDLK_d])
+			moveCamera(270);	
 	}
-
 }
 
 	void UpdateCamera();
