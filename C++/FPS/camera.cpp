@@ -56,7 +56,23 @@ camera::camera(vector3d loc, float yaw, float pitch, float mv, float mov) {
 	mouseVel = mov;
 	mi = false;
 }
-	void Control();
+
+void camera::control()
+{
+	if(mi)
+	{
+
+		int MidX=320;
+		int MidY=240;
+		SDL_ShowCursor(SDL_DISABLE);
+		int tmpx,tmpy;
+		SDL_GetMouseState(&tmpx,&tmpy);
+		camYaw+=mousespeed*(MidX-tmpx);
+		camPitch+=mousespeed*(MidY-tmpy);	
+	}
+
+}
+
 	void UpdateCamera();
 	vector3d getVector();
 	vector3d getLocation();
