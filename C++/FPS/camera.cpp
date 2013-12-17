@@ -89,7 +89,10 @@ void camera::control()
 	glRotatef(-camYaw,0.0,1.0,0.0);
 }
 
-	void UpdateCamera();
+void camera::update()
+{
+	glTranslatef(-loc.x,-loc.y,-loc.z);
+}
 	vector3d getVector();
 	vector3d getLocation();
 	float camPitch();
