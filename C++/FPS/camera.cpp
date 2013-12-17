@@ -93,8 +93,21 @@ void camera::update()
 {
 	glTranslatef(-loc.x,-loc.y,-loc.z);
 }
+
+vector3d camera::getLocation()
+{
+	return loc;
+}
+
+float camera::getYaw()
+{
+	return camYaw;
+}
+float camera::getPitch()
+{
+	return camPitch;
+}
 	vector3d getVector();
-	vector3d getLocation();
 	float camPitch();
 	float camYaw();
 	float getMovevel();
