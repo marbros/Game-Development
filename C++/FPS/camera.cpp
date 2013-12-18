@@ -89,9 +89,15 @@ void camera::control()
 	glRotatef(-camYaw,0.0,1.0,0.0);
 }
 
-void camera::update()
+void camera::updateCamera()
 {
 	glTranslatef(-loc.x,-loc.y,-loc.z);
+}
+
+vector3d camera::getVector()
+{
+//	std::cout << camYaw << " " << camPitch << std::endl;
+	return (vector3d(-cos(camPitch*M_PI/180.0)*sin(camYaw*M_PI/180.0),sin(camPitch*M_PI/180.0),-cos(camPitch*M_PI/180.0)*cos(camYaw*M_PI/180.0)));
 }
 
 vector3d camera::getLocation()
@@ -124,7 +130,24 @@ bool camera::isMouseIn()
 	return mi;
 }
 
-void camera::setLocation(vector3d vec);
-void camera::lookAt(float pitch, float yaw);
-void camera::mouseIn(bool b);
-void camera::setSpeed(float mv, float mov);
+void camera::setLocation(const vector3d& newcoord)
+{
+	loc=newcoord;
+}
+
+void camera::lookAt(const float& y, const float& p)
+{
+	camYaw=y;
+	camPitch=p;
+}
+
+void camera::mouseIn()
+{
+	mi=true;
+}
+
+
+void camera::setSpeed(float mv, float mov) {
+	movevel = mv;
+	mouseVel = mov;
+}
