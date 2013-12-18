@@ -108,13 +108,23 @@ float camera::getPitch()
 	return camPitch;
 }
 	vector3d getVector();
-	float camPitch();
-	float camYaw();
-	float getMovevel();
-	float getMouseVel();
-	bool isMouseIn();
 
-	void setLocation(vector3d vec);
-	void lookAt(float pitch, float yaw);
-	void mouseIn(bool b);
-	void setSpeed(float mv, float mov);
+float camera::getMovevel() 
+{
+	return movevel;
+}
+
+float camera::getMouseVel() 
+{
+	return mouseVel;
+}
+	
+bool camera::isMouseIn()
+{
+	return mi;
+}
+
+void camera::setLocation(vector3d vec);
+void camera::lookAt(float pitch, float yaw);
+void camera::mouseIn(bool b);
+void camera::setSpeed(float mv, float mov);
