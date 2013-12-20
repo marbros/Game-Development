@@ -37,3 +37,16 @@ struct texcoord{
 	float u,v;
 	texcoord(float a,float b);
 };
+
+class objloader{
+	std::vector<std::string*> coord;
+	std::vector<coordinate*> vertex;
+	std::vector<face*> faces;
+	std::vector<coordinate*> normals;
+	std::vector<unsigned int> texture;
+	std::vector<unsigned int> lists;
+	std::vector<material*> materials;
+	std::vector<texcoord*> texturecoordinate;
+	std::vector<coordinate*> vertexnormals;
+
+};
