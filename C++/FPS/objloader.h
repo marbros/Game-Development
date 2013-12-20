@@ -48,5 +48,15 @@ class objloader{
 	std::vector<material*> materials;
 	std::vector<texcoord*> texturecoordinate;
 	std::vector<coordinate*> vertexnormals;
-
+	bool ismaterial,isnormals,istexture,isvertexnormal;
+	unsigned int loadTexture(const char* filename);
+	void clean();
+	void smoothnormals();
+	std::vector<std::string> loadedTextures;
+	std::vector<int> loadedTexturesNum;
+	std::ofstream out;
+	public:
+	objloader();
+	~objloader();
+	int load(const std::string& filename,std::vector<collisionplane>* collisionplane);
 };
