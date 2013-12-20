@@ -20,7 +20,21 @@ public:
 	camera(vector3d loc);
 	camera(vector3d loc, float yaw, float pitch);
 	camera(vector3d loc, float yaw, float pitch, float mv, float mov);
-	void control();
+	void Control();
+	void UpdateCamera();
+	vector3d getVector();
+	vector3d getLocation();
+	float getPitch();
+	float getYaw();
+	float getMovevel();
+	float getMouseVel();
+	bool isMouseIn();
+
+	void setLocation(vector3d vec);
+	void lookAt(float pitch, float yaw);
+	void mouseIn(bool b);
+	void setSpeed(float mv, float mov);
+	
 };
 
 #endif

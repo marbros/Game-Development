@@ -7,7 +7,7 @@ class collisionsphere {
 		float r;
 		vector3d center;
 		collisionsphere();
-		collisionsphere(vector3d& vec);
+		collisionsphere(const vector3d& vec, float rad);
 };
 
 #endif
