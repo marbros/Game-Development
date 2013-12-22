@@ -19,6 +19,20 @@
 		four=false;
 	}
 
+	face::face(int facen,int f1,int f2,int f3,int f4,int t1,int t2,int t3,int t4,int m){
+		facenum=facen;
+		faces[0]=f1;
+		faces[1]=f2;
+		faces[2]=f3;
+		faces[3]=f4;
+		texcoord[0]=t1;
+		texcoord[1]=t2;
+		texcoord[2]=t3;
+		texcoord[3]=t4;
+		mat=m;
+		four=true;
+	}
+
 	material::material(const char* na,float al,float n,float ni2,float* d,float* a,float* s,int i,int t)
 	{
 		name=na;
