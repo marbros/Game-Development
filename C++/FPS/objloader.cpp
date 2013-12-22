@@ -54,3 +54,9 @@
 		illum=i;
 		texture=t;
 	}
+
+	texcoord::texcoord(float a,float b)
+	{
+		u=a;
+		v=b;
+	}
