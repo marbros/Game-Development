@@ -61,6 +61,28 @@
 		v=b;
 	}
 
+int objloader::load(const std::string& filename,std::vector<collisionplane>* collplane)
+{
+	ismaterial=false;
+	isnormals=false;
+	istexture=false;
+	isvertexnormal=false;
+	std::ifstream in(filename.c_str());
+	if(!in.is_open())
+	{
+		out << "Not opened file " << filename << std::endl;
+		return -1;
+	}
+	std::string path=filename.substr(0,((filename.find_last_of('/')+1!=std::string::npos) ? (filename.find_last_of('/')+1):0));
+	out << filename << std::endl;
+	char buf[256];
+	int curmat=0;
+	bool coll=false;
+	int z=0;
+	int h=-1;
+
+}
+
 	unsigned int objloader::loadTexture(const char* filename)
 	{
 		unsigned int num;
