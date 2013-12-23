@@ -60,3 +60,20 @@
 		u=a;
 		v=b;
 	}
+
+	unsigned int objloader::loadTexture(const char* filename)
+	{
+		unsigned int num;
+		glGenTextures(1,&num);
+		SDL_Surface* img=SDL_LoadBMP(filename);
+		glBindTexture(GL_TEXTURE_2D,num);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h,0,GL_RGB,GL_UNSIGNED_SHORT_5_6_5,img->pixels);
+		glTexEnvi(GL_TEXTURE_2D,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+		SDL_FreeSurface(img);
+		texture.push_back(num);
+		loadedTextures.push_back(filename);
+		loadedTexturesNum.push_back(num);
+		return num;
+	}
