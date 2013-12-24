@@ -80,7 +80,23 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 	bool coll=false;
 	int z=0;
 	int h=-1;
-
+	while(!in.eof())
+	{
+		in.getline(buf,256);
+		coord.push_back(new std::string(buf));
+	}	
+	for(int i=0;i<coord.size();i++)
+	{
+		if((*coord[i])[0]=='#')
+			continue;
+		else if((*coord[i])[0]=='v' && (*coord[i])[1]==' ')
+		{
+			float tmpx,tmpy,tmpz;
+			sscanf(coord[i]->c_str(),"v %f %f %f",&tmpx,&tmpy,&tmpz);
+			vertex.push_back(new coordinate(tmpx,tmpy,tmpz));
+			out << "v " << tmpx << " " << tmpy << " " << tmpz << std::endl;
+		}
+	}		
 }
 
 	unsigned int objloader::loadTexture(const char* filename)
