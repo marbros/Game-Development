@@ -115,3 +115,20 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 		loadedTexturesNum.push_back(num);
 		return num;
 	}
+
+void objloader::smoothnormals()
+{
+		int i = 0;
+		int num=0;
+		for(int j=0;j<faces.size();j++)
+		{
+			if(faces[j]->faces[0]==i || faces[j]->faces[1]==i || faces[j]->faces[2]==i || faces[j]->faces[3]==i)
+			{
+				vecX+=normals[faces[j]->facenum-1]->x;
+				vecY+=normals[faces[j]->facenum-1]->y;
+				vecZ+=normals[faces[j]->facenum-1]->z;
+				num++;
+			}
+			i++;
+		}
+}
