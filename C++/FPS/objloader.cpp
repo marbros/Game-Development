@@ -118,7 +118,9 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 
 void objloader::smoothnormals()
 {
-		int i = 0;
+	for(int i=1;i<vertex.size()+1;i++)
+	{
+		float vecX=0.0,vecY=0.0,vecZ=0.0;
 		int num=0;
 		for(int j=0;j<faces.size();j++)
 		{
@@ -129,6 +131,20 @@ void objloader::smoothnormals()
 				vecZ+=normals[faces[j]->facenum-1]->z;
 				num++;
 			}
-			i++;
 		}
+		if(num)
+		{
+			vecX/=num;
+			vecY/=num;
+			vecZ/=num;
+		}
+		float d=sqrt(vecX*vecX+vecY*vecY+vecZ*vecZ);
+		if(d)
+		{
+			vecX/=d;
+			vecY/=d;
+			vecZ/=d;
+		}
+		vertexnormals.push_back(new coordinate(vecX,vecY,vecZ));
+	}
 }
