@@ -95,7 +95,12 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 			sscanf(coord[i]->c_str(),"v %f %f %f",&tmpx,&tmpy,&tmpz);
 			vertex.push_back(new coordinate(tmpx,tmpy,tmpz));
 			out << "v " << tmpx << " " << tmpy << " " << tmpz << std::endl;
-		}
+		}else if((*coord[i])[0]=='v' && (*coord[i])[1]=='n')
+		{
+			float tmpx,tmpy,tmpz;
+			sscanf(coord[i]->c_str(),"vn %f %f %f",&tmpx,&tmpy,&tmpz);
+			normals.push_back(new coordinate(tmpx,tmpy,tmpz));	
+			out << "vn " << tmpx << " " << tmpy << " " << tmpz << std::endl;
 	}		
 }
 
