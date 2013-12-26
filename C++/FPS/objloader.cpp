@@ -101,6 +101,26 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 			sscanf(coord[i]->c_str(),"vn %f %f %f",&tmpx,&tmpy,&tmpz);
 			normals.push_back(new coordinate(tmpx,tmpy,tmpz));	
 			out << "vn " << tmpx << " " << tmpy << " " << tmpz << std::endl;
+		}else if((*coord[i])[0]=='f')
+		{
+			int a,b,c,d,e;			
+			if(coll && collplane!=NULL)
+			{
+				sscanf(coord[i]->c_str(),"f %d//%d %d//%d %d//%d %d//%d",&a,&b,&c,&b,&d,&b,&e,&b);
+				collplane->push_back(collisionplane(normals[b-1]->x,normals[b-1]->y,normals[b-1]->z,vertex[a-1]->x,vertex[a-1]->y,vertex[a-1]->z,vertex[c-1]->x,vertex[c-1]->y,vertex[c-1]->z,vertex[d-1]->x,vertex[d-1]->y,vertex[d-1]->z,vertex[e-1]->x,vertex[e-1]->y,vertex[e-1]->z));
+			}else
+			{
+				if(count(coord[i]->begin(),coord[i]->end(),' ')==4)
+				{
+					if(coord[i]->find("//")!=std::string::npos)
+					{
+						sscanf(coord[i]->c_str(),"f %d//%d %d//%d %d//%d %d//%d",&a,&b,&c,&b,&d,&b,&e,&b);
+						faces.push_back(new face(b,a,c,d,e,0,0,0,0,curmat));
+					}
+
+				}
+			}
+		}			
 	}		
 }
 
