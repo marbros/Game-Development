@@ -116,6 +116,15 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 					{
 						sscanf(coord[i]->c_str(),"f %d//%d %d//%d %d//%d %d//%d",&a,&b,&c,&b,&d,&b,&e,&b);
 						faces.push_back(new face(b,a,c,d,e,0,0,0,0,curmat));
+					}else if(coord[i]->find("/")!=std::string::npos)
+					{
+						int t[4];
+						sscanf(coord[i]->c_str(),"f %d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d",&a,&t[0],&b,&c,&t[1],&b,&d,&t[2],&b,&e,&t[3],&b);
+						out << t[0] << " " <<t[1] << " " <<t[2] << " " <<t[3] << " " << a << " " << b << " " << c << " " << d << " " << e << std::endl;
+						faces.push_back(new face(b,a,c,d,e,t[0],t[1],t[2],t[3],curmat));
+					}else{
+						sscanf(coord[i]->c_str(),"f %d %d %d %d",&a,&b,&c,&d);
+						faces.push_back(new face(-1,a,b,c,d,0,0,0,0,curmat));					
 					}
 
 				}
