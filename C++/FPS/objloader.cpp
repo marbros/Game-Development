@@ -141,8 +141,27 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 							faces.push_back(new face(-1,a,b,c,0,0,0,curmat));					
 						}
 				}
-			}
+			}			
 		}			
+	}else if((*coord[i])[0]=='u' && (*coord[i])[1]=='s' && (*coord[i])[2]=='e')
+	{
+		char tmp[200];
+		sscanf(coord[i]->c_str(),"usemtl %s",tmp);
+		if(strcmp(tmp,"collision")==0)
+		{
+			coll=true;
+		}else{
+			coll=false;
+			for(int i=0;i<materials.size();i++)
+			{
+				if(strcmp(materials[i]->name.c_str(),tmp)==0)
+				{
+					curmat=i;
+					out << "curmat=" << i  << std::endl;
+					break;
+				}
+			}
+		}
 	}		
 }
 
