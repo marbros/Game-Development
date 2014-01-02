@@ -185,6 +185,13 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 	}		
 }
 
+void objloader::clean()
+{
+	for(int i=0;i<coord.size();i++)
+		delete coord[i];
+	coord.clear();
+}
+
 unsigned int objloader::loadTexture(const char* filename)
 {
 	unsigned int num;
