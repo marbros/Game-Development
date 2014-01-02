@@ -162,6 +162,26 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 				}
 			}
 		}
+	}else if((*coord[i])[0]=='m' && (*coord[i])[1]=='t' && (*coord[i])[2]=='l' && (*coord[i])[3]=='l')
+	{
+		char filen[200];
+		sscanf(coord[i]->c_str(),"mtllib %s",filen);
+		std::string filen2=path+filen;
+		std::ifstream mtlin(filen2.c_str());
+		if(!mtlin.is_open())
+		{
+			out << "connot open the material file " << filen2 << std::endl;
+			clean();
+			return -1;
+		}
+		ismaterial=true;
+		std::vector<std::string> tmp;
+		char c[200];
+		while(!mtlin.eof())
+		{
+			mtlin.getline(c,200);
+			tmp.push_back(c);
+		}
 	}		
 }
 
