@@ -182,6 +182,31 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 			mtlin.getline(c,200);
 			tmp.push_back(c);
 		}
+		char name[200];
+		char filename[200];
+		float amb[3],dif[3],spec[3],alpha,ns,ni;
+		int illum;
+		unsigned int texture;
+		bool ismat=false;
+		for(int i=0;i<tmp.size();i++)
+		{
+			if(tmp[i][0]=='#')
+				continue;
+			if(tmp[i][0]=='n' && tmp[i][1]=='e' && tmp[i][2]=='w')
+			{
+				if(ismat)
+				{
+					if(strcmp(filename,"\0")!=0 && strcmp(filename,"collision")!=0)
+					{
+						materials.push_back(new material(name,alpha,ns,ni,dif,amb,spec,illum,texture));
+						strcpy(filename,"\0");
+					}else{
+							materials.push_back(new material(name,alpha,ns,ni,dif,amb,spec,illum,-1));				
+					}
+				}
+
+			}
+		}		
 	}		
 }
 
