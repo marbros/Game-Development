@@ -214,7 +214,10 @@ void objloader::clean()
 {
 	for(int i=0;i<coord.size();i++)
 		delete coord[i];
+	for(int i=0;i<materials.size();i++)
+			delete materials[i];	
 	coord.clear();
+	materials.clear();	
 }
 
 unsigned int objloader::loadTexture(const char* filename)
