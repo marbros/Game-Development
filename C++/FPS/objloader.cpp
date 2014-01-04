@@ -250,6 +250,14 @@ void objloader::clean()
 	materials.clear();	
 }
 
+objloader::~objloader()
+{
+	for(std::vector<unsigned int>::const_iterator it=texture.begin();it!=texture.end();it++)
+	{
+		glDeleteTextures(1,&(*it));
+	}
+}
+
 unsigned int objloader::loadTexture(const char* filename)
 {
 	unsigned int num;
