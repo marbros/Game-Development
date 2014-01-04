@@ -237,7 +237,17 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 				ismat=true;
 			}
 		}		
-	}		
+		if(ismat)
+		{
+			if(strcmp(filename,"\0")!=0)
+			{
+				materials.push_back(new material(name,alpha,ns,ni,dif,amb,spec,illum,texture));
+			}else{
+				materials.push_back(new material(name,alpha,ns,ni,dif,amb,spec,illum,-1));				
+				}
+			}
+		}				
+	}	
 }
 
 void objloader::clean()
