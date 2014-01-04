@@ -204,7 +204,37 @@ int objloader::load(const std::string& filename,std::vector<collisionplane>* col
 							materials.push_back(new material(name,alpha,ns,ni,dif,amb,spec,illum,-1));				
 					}
 				}
-
+				ismat=false;
+				sscanf(tmp[i].c_str(),"newmtl %s",name);
+				out << "newmtl " << name << std::endl;
+			}else if(tmp[i][0]=='N' && tmp[i][1]=='s')
+			{
+				sscanf(tmp[i].c_str(),"Ns %f",&ns);
+				ismat=true;
+			}else if(tmp[i][0]=='K' && tmp[i][1]=='a')
+			{
+				sscanf(tmp[i].c_str(),"Ka %f %f %f",&amb[0],&amb[1],&amb[2]);
+				ismat=true;
+			}else if(tmp[i][0]=='K' && tmp[i][1]=='d')
+			{
+				sscanf(tmp[i].c_str(),"Kd %f %f %f",&dif[0],&dif[1],&dif[2]);
+				ismat=true;
+			}else if(tmp[i][0]=='K' && tmp[i][1]=='s')
+			{
+				sscanf(tmp[i].c_str(),"Ks %f %f %f",&spec[0],&spec[1],&spec[2]);
+				ismat=true;
+			}else if(tmp[i][0]=='N' && tmp[i][1]=='i')
+			{
+				sscanf(tmp[i].c_str(),"Ni %f",&ni);
+				ismat=true;
+			}else if(tmp[i][0]=='d' && tmp[i][1]==' ')
+			{
+				sscanf(tmp[i].c_str(),"d %f",&alpha);
+				ismat=true;
+			}else if(tmp[i][0]=='i' && tmp[i][1]=='l')
+			{
+				sscanf(tmp[i].c_str(),"illum %d",&illum);
+				ismat=true;
 			}
 		}		
 	}		
