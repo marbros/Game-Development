@@ -47,6 +47,59 @@ public class GamePanel extends JPanel implements MouseListener, MouseMotionListe
             setFocusable(true);
             requestFocus();
 	}    
+
+
+	public void run() {
+            init();
+            
+            long start;
+            long elapsed;
+            long wait;
+		
+            // game loop
+            while(running) {
+                start = System.nanoTime();
+			
+		update();
+		draw();
+                drawToScreen();
+			
+		elapsed = System.nanoTime() - start;
+                wait = targetTime - elapsed / 1000000;
+		if(wait < 0) wait = 5;
+                
+                try {
+                    Thread.sleep(wait);
+                }catch(Exception e) {
+                    e.printStackTrace();
+		}
+            }	
+	}
+	
+	private void update() {
+            gsm.update();
+            Keys.update();
+            Mouse.update();
+	}
+	
+        private void draw() {
+            gsm.draw(g);
+	}
+        
+	private void drawToScreen() {
+            Graphics g2 = getGraphics();
+            g2.drawImage(image, 0, 0, null);
+            g2.dispose();
+            if(screenshot) {
+		screenshot = false;
+                try {
+                    java.io.File out = new java.io.File("screenshot " + System.nanoTime() + ".png");
+                    javax.imageio.ImageIO.write(image, "png", out);
+		}catch(Exception e) {
+                    e.printStackTrace();
+		}
+            }
+	}        
         
 	public void keyPressed(KeyEvent key) {
 		if(key.isControlDown()) {
