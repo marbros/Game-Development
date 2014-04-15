@@ -35,4 +35,10 @@ public class Particle {
   public float getyVel(){
     return yVel;
   }
+
+  public void draw(Graphics2D g) {
+    g.setColor(color.BLUE);
+    g.drawOval((int)xPos - width / 2, (int)yPos - height / 2, width, height);
+  }
+
 }
