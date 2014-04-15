@@ -21,6 +21,15 @@ public class ParticleFactory {
 			double dy = Math.random() * 4 - 2;
 			particles.add(new Particle(x, y, dx, dy, c));
 		}
+		checkLimit();
+	}
+	
+	public static void checkLimit() {
+		int extra = particles.size() - MAX_PARTICLES;
+		if(extra <= 0) return;
+		for(int i = 0; i < extra; i++) {
+			particles.remove(0);
+		}
 	}
 	
 }
