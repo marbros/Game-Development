@@ -15,4 +15,12 @@ public class ParticleFactory {
 		createExplosion(x, y, Color.WHITE);
 	}
 	
+	public static void createExplosion(double x, double y, Color c) {
+		for(int i = 0; i < 10; i++) {
+			double dx = Math.random() * 4 - 2;
+			double dy = Math.random() * 4 - 2;
+			particles.add(new Particle(x, y, dx, dy, c));
+		}
+	}
+	
 }
