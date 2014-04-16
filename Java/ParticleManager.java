@@ -16,6 +16,16 @@
         rand = new Random();
     }
 
+    public void Gravity(Vector3f gravity, float distance) {
+        Vector3f additionalVelocity = gravity.mult(1000f / (distance*distance + 10000f));
+        velocity.addLocal(additionalVelocity);
+        
+        if (distance < 400) {
+            additionalVelocity = new Vector3f(gravity.y, -gravity.x, 0).mult(3f / (distance + 100));
+            velocity.addLocal(additionalVelocity);
+        }
+    }
+
     public void sprayParticle(Vector3f position, Vector3f sprayVel) {
         Spatial particle = standardParticle.clone();
         particle.setLocalTranslation(position);
